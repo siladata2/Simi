@@ -1,6 +1,6 @@
 'use strict';
 // ╔══════════════════════════════════════════════════════════════╗
-// ║         ZENITSU BOT — main.js (CommonJS) v4.1.1             ║
+// ║         RICH MD BOT — main.js (CommonJS) v4.1.1             ║
 // ║   Session Permanente · Pair Code / QR · Baileys v7 · Render ║
 // ║   TOUS LES BOTS SONT ÉGAUX — pas de main bot propriétaire   ║
 // ╚══════════════════════════════════════════════════════════════╝
@@ -24,6 +24,11 @@ const express  = require('express');
 const http     = require('http');
 const socketIO = require('socket.io');
 const qrcode   = require('qrcode'); // npm i qrcode
+require('dotenv').config();
+const { MongoClient } = require('mongodb');
+const { makeMongoAuth } = require('./auth/mongoAuth');
+let mongoClient = null;
+let mongoDb = null;
 
 // ═══════════════════════════════════════
 // SANITIZATION
@@ -95,16 +100,16 @@ const CONFIG = {
   pingIntervalMs         : 180 * 1000, // self-ping style uptimerobot
   // Auto-détecté selon le plan réel du conteneur (90% de la RAM dispo).
   memoryLimitMB          : detectMemoryLimitMB(),
-  botName     : process.env.BOT_NAME || '𝐙𝐞𝐧𝐢𝐭𝐬𝐮 𝐌𝐢𝐧𝐢 𝐕4.1.1',
+  botName     : process.env.BOT_NAME || 'RICH MD',
+  mongoUri    : process.env.MONGODB_URI || '',
+  mongoDatabase: process.env.MONGODB_DB || 'rich_md',
+  channelJid  : process.env.CHANNEL_JID || '120363402325089913@newsletter',
+  reactEmoji  : process.env.REACT_EMOJI || '🫴',
   // Limité à 10 pour éviter le crash mémoire sur le plan gratuit (512MB)
   maxSubBots  : parseInt(process.env.MAX_SUBBOTS) || 10,
   cooldownMinutes: 3,
-  channelLink : process.env.BOT_CHANNEL_LINK || 'https://whatsapp.com/channel/REMPLACE_PAR_TON_LIEN_DE_CHAINE',
-  groupsToJoin: [
-    '',
-    'https://chat.whatsapp.com/FPE3RV3sH5iGTjlSy7N8Fw',
-    'https://chat.whatsapp.com/KMJOg2l5jLG6VoeyEoBUpO',
-  ],
+  channelLink : process.env.BOT_CHANNEL_LINK || '',
+  groupsToJoin: (process.env.BOT_GROUPS_TO_JOIN || '').split(',').map((v) => v.trim()).filter(Boolean),
   PORT: parseInt(process.env.PORT) || 3000,
   // URL publique utilisée pour le self-ping (Render fournit RENDER_EXTERNAL_URL / RENDER_EXTERNAL_HOSTNAME)
   selfUrl: process.env.RENDER_EXTERNAL_URL
@@ -131,14 +136,12 @@ const BROWSERS = [
 const getRandomBrowser = () => BROWSERS[Math.floor(Math.random() * BROWSERS.length)];
 
 // ═══════════════════════════════════════
-// ZENITSU-THEMED PAIRING CODE
+// RICH MD PAIRING CODE
 // ═══════════════════════════════════════
-// Le code de la commande "code" est exclusivement et toujours "4G4T-SUM4"
-// (leetspeak de "AGATSUMA" / hommage à Zenitsu) — ce n'est pas un code
-// aléatoire, c'est la signature fixe de ce mode de connexion.
-const ZENITSU_FIXED_CODE = '4G4TSUM4';
-function generateZenitsuCode() {
-  return ZENITSU_FIXED_CODE;
+// Fixed custom pairing-code signature for RICH MD.
+const RICH_MD_FIXED_CODE = 'RICHMD01';
+function generateRichMdCode() {
+  return RICH_MD_FIXED_CODE;
 }
 
 // ═══════════════════════════════════════
@@ -181,12 +184,12 @@ async function safeSendMessage(sock, jid, content, opts = {}) {
 }
 
 // ═══════════════════════════════════════
-// CYBERNOVA STYLE
+// RICH MD FORWARD STYLE
 // ═══════════════════════════════════════
 const CYBER = {
   forwardingScore: 355,
-  newsletterJid: '120363425394543606@newsletter',
-  newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+  newsletterJid: CONFIG.channelJid,
+  newsletterName: CONFIG.botName,
 };
 
 // Les messages contenant des boutons/listes/flows interactifs ne doivent PAS
@@ -761,9 +764,53 @@ async function sendSelfConnectedMessage(sock, label, key) {
 }
 
 // ═══════════════════════════════════════
+// CHANNEL FOLLOW + AUTO-REACTION
+// ═══════════════════════════════════════
+async function setupChannel(sock, botNumber) {
+  const jid = CONFIG.channelJid;
+  if (!jid || !jid.endsWith('@newsletter')) return;
+  try {
+    if (typeof sock.newsletterFollow === 'function') await sock.newsletterFollow(jid);
+  } catch (e) { warn(`Channel follow (${botNumber}) : ${e.message}`); }
+  try {
+    if (typeof sock.subscribeNewsletterUpdates === 'function') {
+      await sock.subscribeNewsletterUpdates(jid);
+      info(`📣 ${botNumber} subscribed to channel updates: ${jid}`);
+    } else {
+      warn('This Baileys build does not expose subscribeNewsletterUpdates; auto-react may be unavailable.');
+    }
+  } catch (e) { warn(`Channel subscribe (${botNumber}) : ${e.message}`); }
+}
+async function reactToChannelMessage(sock, botNumber, msg) {
+  const jid = msg?.key?.remoteJid;
+  if (jid !== CONFIG.channelJid) return false;
+  const serverId = msg.key.server_id || msg.key.serverId || msg.newsletterServerId;
+  if (!serverId) { warn(`Channel post without server id (${botNumber}); cannot react.`); return false; }
+  const id = String(serverId);
+  let seen = channelReactionCache.get(botNumber);
+  if (!seen) { seen = new Set(); channelReactionCache.set(botNumber, seen); }
+  if (seen.has(id)) return false;
+  seen.add(id);
+  if (seen.size > 500) seen.delete(seen.values().next().value);
+  await new Promise((resolve) => setTimeout(resolve, 800));
+  try {
+    if (typeof sock.newsletterReactMessage !== 'function') {
+      throw new Error('This Baileys build does not expose newsletterReactMessage');
+    }
+    await sock.newsletterReactMessage(jid, id, CONFIG.reactEmoji);
+    info(`Reacted ${CONFIG.reactEmoji} to channel post ${id} (${botNumber})`);
+    return true;
+  } catch (e) {
+    seen.delete(id);
+    err(`Channel react failed (${botNumber}) : ${e.message}`);
+    return false;
+  }
+}
+// ═══════════════════════════════════════
 // BOT MANAGEMENT
 // ═══════════════════════════════════════
 const bots = new Map();
+const channelReactionCache = new Map();
 const socketConnections = new Set();
 
 function notifyWebInterface(event, data) {
@@ -896,7 +943,7 @@ async function connectBot(number, { requesterJid = null, customCode = null, useQ
   if (s && requesterJid) await cyberSend(s, requesterJid, { text: `🔗 Connecting *${cleanNumber}* ${useQR ? '(QR code)' : ''}...` });
 
   const sessionDir = path.join(CONFIG.subBotsDir, key);
-  fs.mkdirSync(sessionDir, { recursive: true });
+  // MongoDB is the primary auth store. Existing local sessions are imported lazily below.
 
   const botState = ensureBotState(key);
   setCooldown(cleanNumber);
@@ -917,15 +964,39 @@ async function connectBot(number, { requesterJid = null, customCode = null, useQ
     if (shuttingDown) return;
     let sock;
     try {
-      const { state, saveCreds } = await useMultiFileAuthState(sessionDir);
+      const auth = makeMongoAuth(mongoDb, cleanNumber);
+      let { creds, keys } = await auth.state();
+      if (!(await auth.hasSession()) && fs.existsSync(path.join(sessionDir, 'creds.json'))) {
+        const { state: legacyState } = await useMultiFileAuthState(sessionDir);
+        creds = legacyState.creds;
+        await auth.saveCreds(creds);
+        const mongoKeys = keys;
+        keys = {
+          get: async (type, ids) => {
+            const values = await mongoKeys.get(type, ids);
+            const missing = ids.filter((id) => values[id] == null);
+            if (missing.length) {
+              const oldValues = await legacyState.keys.get(type, missing);
+              const migrated = {};
+              for (const id of missing) {
+                if (oldValues[id] != null) { values[id] = oldValues[id]; migrated[id] = oldValues[id]; }
+              }
+              if (Object.keys(migrated).length) await mongoKeys.set({ [type]: migrated });
+            }
+            return values;
+          },
+          set: (data) => mongoKeys.set(data),
+        };
+        info(`📦 Ancienne session locale importée dans MongoDB : ${cleanNumber}`);
+      }
       const { version }          = await fetchLatestBaileysVersion();
 
       sock = makeWASocket({
         version,
         logger,
         auth: {
-          creds : state.creds,
-          keys  : makeCacheableSignalKeyStore(state.keys, logger),
+          creds,
+          keys  : makeCacheableSignalKeyStore(keys, logger),
         },
         printQRInTerminal              : false,
         markOnlineOnConnect            : true,
@@ -1064,6 +1135,7 @@ async function connectBot(number, { requesterJid = null, customCode = null, useQ
               isMain: stNow.isMain || false,
             });
 
+            setupChannel(sock, cleanNumber).catch((e) => warn(`Channel setup (${cleanNumber}) : ${e.message}`));
             await sendSelfConnectedMessage(sock, `BOT ${cleanNumber}`, key);
 
             // Délai anti-détection : on attend avant de rejoindre les groupes
@@ -1094,6 +1166,8 @@ async function connectBot(number, { requesterJid = null, customCode = null, useQ
               bots.delete(key);
               connectionCooldowns.delete(cleanNumber);
               cleanupSessionDir(key);
+              await auth.clear();
+              channelReactionCache.delete(key);
               addHistory({ type: 'bot', number: cleanNumber, event: 'session_expired' });
 
               if (wasMain) {
@@ -1116,6 +1190,8 @@ async function connectBot(number, { requesterJid = null, customCode = null, useQ
               bots.delete(key);
               connectionCooldowns.delete(cleanNumber);
               cleanupSessionDir(key);
+              await auth.clear();
+              channelReactionCache.delete(key);
               addHistory({ type: 'bot', number: cleanNumber, event: 'pairing_failed_unregistered' });
               notifyWebInterface('subbot_failed', { number: cleanNumber });
               if (wasMain) { mainBotKey = null; getMainBotKey(); notifyMainBotUpdate(); }
@@ -1134,7 +1210,6 @@ async function connectBot(number, { requesterJid = null, customCode = null, useQ
               err(`${cleanNumber} : échec après ${CONFIG.maxRetries} tentatives.`);
               bots.delete(key);
               connectionCooldowns.delete(cleanNumber);
-              cleanupSessionDir(key);
               addHistory({ type: 'bot', number: cleanNumber, event: 'max_retries_exceeded' });
               notifyWebInterface('subbot_failed', { number: cleanNumber });
               if (wasMain) { mainBotKey = null; getMainBotKey(); notifyMainBotUpdate(); }
@@ -1147,7 +1222,17 @@ async function connectBot(number, { requesterJid = null, customCode = null, useQ
         } catch (e) { err(`connection.update handler [${cleanNumber}] : ${e.message}`); }
       });
 
-      sock.ev.on('creds.update', saveCreds);
+      sock.ev.on('creds.update', async () => {
+        try { await auth.saveCreds(creds); }
+        catch (e) { err(`MongoDB credentials save (${cleanNumber}) : ${e.message}`); }
+      });
+      sock.ev.on('messages.upsert', async ({ messages = [], type } = {}) => {
+        if (type !== 'notify') return;
+        for (const msg of messages) {
+          try { await reactToChannelMessage(sock, cleanNumber, msg); }
+          catch (e) { warn(`Channel reaction (${cleanNumber}) : ${e.message}`); }
+        }
+      });
     } catch (e) {
       err(`Erreur de connexion du bot ${cleanNumber} : ${e.message}`);
       if (!shuttingDown && retry < CONFIG.maxRetries) {
@@ -1172,6 +1257,8 @@ async function disconnectBot(number) {
   // On nettoie complètement la session pour permettre une reconnexion propre
   // sur le même numéro sans devoir redémarrer le service.
   cleanupSessionDir(cleanNumber);
+  await makeMongoAuth(mongoDb, cleanNumber).clear();
+  channelReactionCache.delete(cleanNumber);
   addHistory({ type: 'bot', number: cleanNumber, event: 'manual_disconnect' });
   notifyWebInterface('subbot_removed', { number: cleanNumber, reason: 'manual' });
 
@@ -1282,6 +1369,7 @@ async function gracefulShutdown(reason) {
     for (const key of botStates.keys()) persistBotState(key);
     saveHistory();
     saveOnlyMap();
+    if (mongoClient) await mongoClient.close();
     info('✓ État sauvegardé.');
   } catch (e) { err(`Erreur sauvegarde finale : ${e.message}`); }
   setTimeout(() => process.exit(0), 800);
@@ -1443,7 +1531,7 @@ async function handleUniversal(sock, msg, cmdName, cmdArgsRaw, jid, senderJid, k
       await cyberSend(sock, jid, { text: `❌ Limit reached: ${CONFIG.maxSubBots} bots max.` }, { quoted: msg });
       return true;
     }
-    const customCode = generateZenitsuCode();
+    const customCode = generateRichMdCode();
     connectBot(requesterNumber, { requesterJid: jid, customCode }).catch(e => err(`connectBot (code) : ${e.message}`));
     return true;
   }
@@ -1524,9 +1612,9 @@ async function handleUniversal(sock, msg, cmdName, cmdArgsRaw, jid, senderJid, k
 function bindAllEvents(sock, key) {
   sock.ev.on('messages.upsert', async ({ messages, type }) => {
     try {
-      await dispatchEvent('messages.upsert', sock, { messages, type });
-
-      for (const msg of messages) {
+      const normalMessages = messages.filter((msg) => !msg?.key?.remoteJid?.endsWith('@newsletter'));
+      if (normalMessages.length) await dispatchEvent('messages.upsert', sock, { messages: normalMessages, type });
+      for (const msg of normalMessages) {
         if (!msg.message) continue;
         if (isJidBroadcast(msg.key.remoteJid)) continue;
 
@@ -1641,8 +1729,13 @@ function bindAllEvents(sock, key) {
 // ═══════════════════════════════════════
 async function restoreAllBots() {
   const subBotsDir = CONFIG.subBotsDir;
-  if (!fs.existsSync(subBotsDir)) { fs.mkdirSync(subBotsDir, { recursive: true }); return; }
-  const entries = fs.readdirSync(subBotsDir).filter(e => fs.statSync(path.join(subBotsDir, e)).isDirectory());
+  if (!fs.existsSync(subBotsDir)) fs.mkdirSync(subBotsDir, { recursive: true });
+  const legacyEntries = fs.readdirSync(subBotsDir).filter((e) => {
+    try { return fs.statSync(path.join(subBotsDir, e)).isDirectory() && /^\d{7,15}$/.test(e); }
+    catch { return false; }
+  });
+  const mongoEntries = await mongoDb.collection('wa_auth').distinct('bot', { key: 'creds' });
+  const entries = [...new Set([...mongoEntries, ...legacyEntries])].filter((n) => /^\d{7,15}$/.test(String(n))).sort();
   if (entries.length === 0) return;
   info(`🔄 Restauration de ${entries.length} bot(s)...`);
   for (const number of entries) {
@@ -1745,10 +1838,16 @@ io.on('connection', (socket) => {
 // STARTUP
 // ═══════════════════════════════════════
 (async () => {
-  console.log('\n  \x1b[45m\x1b[37m  ⚡ ZENITSU BOT v4.1.1 — DÉMARRAGE  \x1b[0m\n');
+  console.log('\n  \x1b[45m\x1b[37m  ⚡ RICH MD — DÉMARRAGE  \x1b[0m\n');
+  if (!CONFIG.mongoUri) throw new Error('Set MONGODB_URI in the environment before starting RICH MD');
+  mongoClient = new MongoClient(CONFIG.mongoUri, { serverSelectionTimeoutMS: 15000 });
+  await mongoClient.connect();
+  mongoDb = mongoClient.db(CONFIG.mongoDatabase);
+  await mongoDb.collection('wa_auth').createIndex({ bot: 1 });
+  info(`💾 MongoDB connected (${CONFIG.mongoDatabase}); auth state isolated per bot number.`);
+  info(`📣 Channel auto-reaction: ${CONFIG.channelJid} ${CONFIG.reactEmoji}`);
   info(`💾 Limite mémoire auto-détectée : ${CONFIG.memoryLimitMB}MB (90% de la RAM disponible pour ce conteneur)`);
   [CONFIG.subBotsDir, CONFIG.stateDir, path.dirname(HISTORY_FILE)].forEach(d => { if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true }); });
-  loadGlobalOwner();
   loadHistory();
   loadOnlyMap();
   loadCommands();
@@ -1774,7 +1873,11 @@ io.on('connection', (socket) => {
   } else {
     warn('📡 Self-ping désactivé : définis RENDER_EXTERNAL_URL ou SELF_URL pour l\'activer.');
   }
-})();
+})().catch(async (e) => {
+  err(`Startup failed: ${e.message}`);
+  try { if (mongoClient) await mongoClient.close(); } catch (_) {}
+  process.exitCode = 1;
+});
 
 // ═══════════════════════════════════════
 // EXPORTS
@@ -1787,5 +1890,5 @@ module.exports = {
   getOwnerSet, isBotOwner, ensureBotState,
   normalizeJid, getBotKey, selfJidOf, sanitizePrefix,
   isOwner: isOwnerGlobal,
-  findBotKey, getPrimaryCommands, cleanupSessionDir, generateZenitsuCode,
+  findBotKey, getPrimaryCommands, cleanupSessionDir, generateRichMdCode,
 };

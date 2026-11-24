@@ -1,16 +1,63 @@
 {
-    "name": "SILA-MD",
-    "description": "Pair Session Generator",
-    "logo": "https://files.catbox.moe/36vahk.png",
-    "repository": "https://github.com/Sila-Md",
-    "keywords": ["SILA-MD", "SILA-TECH", "MBWA-MD"],
-    "success_url": "/",
-    "buildpacks": [{ "url": "heroku/nodejs" }],
-    "env": {
-      "PORT": {
-        "description": "Port for web app.4000,5000,3000... any!",
-        "value": "5000",
-        "required": false
-      }
+  "name": "RICH-MD",
+  "description": "RICH MD WhatsApp bot with MongoDB-backed sessions and channel auto-reactions",
+  "keywords": [
+    "RICH-MD",
+    "WhatsApp",
+    "MongoDB",
+    "Channel-Reaction"
+  ],
+  "success_url": "/",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
     }
+  ],
+  "env": {
+    "PORT": {
+      "description": "Port for web app.4000,5000,3000... any!",
+      "value": "5000",
+      "required": false
+    },
+    "MONGODB_URI": {
+      "description": "MongoDB Atlas connection URI (required; keep private)",
+      "required": true
+    },
+    "MONGODB_DB": {
+      "description": "MongoDB database name",
+      "value": "rich_md",
+      "required": false
+    },
+    "BOT_NAME": {
+      "description": "Bot display name",
+      "value": "RICH MD",
+      "required": false
+    },
+    "CHANNEL_JID": {
+      "description": "WhatsApp Channel JID for auto-reactions",
+      "value": "120363402325089913@newsletter",
+      "required": false
+    },
+    "REACT_EMOJI": {
+      "description": "Emoji used for channel auto-reactions",
+      "value": "🫴",
+      "required": false
+    },
+    "BOT_OWNER": {
+      "description": "Owner WhatsApp number in international format (optional)",
+      "required": false
+    },
+    "OWNER_NAME": {
+      "description": "Owner display name (optional)",
+      "required": false
+    },
+    "BOT_CHANNEL_LINK": {
+      "description": "Public WhatsApp channel URL (optional; not the channel JID)",
+      "required": false
+    },
+    "BOT_GROUPS_TO_JOIN": {
+      "description": "Optional comma-separated WhatsApp group invite links",
+      "required": false
+    }
+  }
 }

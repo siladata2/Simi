@@ -49,8 +49,8 @@ function isOwner(sock, senderJid) {
     if (botIds.includes(senderRaw)) return true;
 
     // Owner configuré
-    const ownerNumber = process.env.OWNER_NUMBER || '50935729494';
-    if (senderRaw === ownerNumber) return true;
+    const ownerNumber = (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, '');
+    if (ownerNumber && senderRaw === ownerNumber) return true;
 
     // Sub-bots (si global.subBots existe)
     if (global.subBots && global.subBots instanceof Map) {

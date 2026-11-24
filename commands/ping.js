@@ -29,13 +29,13 @@ module.exports = {
         //   suivants du même lien — c'est l'effet que tu as observé.
         const contextInfo = {
             externalAdReply: {
-                title: "𝙯𝙚𝙣𝙞𝙩𝙨𝙪 𝙈𝙄𝙉𝙄 • PING",
+                title: "RICH • PING",
                 body: `Response: ${speed}ms`,
                 thumbnailUrl: 'https://iili.io/CEfM5Gf.jpg',
                 sourceUrl: 'https://chat.whatsapp.com/FPE3RV3sH5iGTjlSP7N8Fw',
                 mediaUrl: 'https://iili.io/CEfM5Gf.jpg',
                 mediaType: 1,
-                renderLargerThumbnail: true,
+                renderLargerThumbnail: false,
                 showAdAttribution: false,
             },
             forwardingScore: 54,

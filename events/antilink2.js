@@ -221,7 +221,7 @@ function getCybernovaStyle() {
         forwardingScore: 350,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363425394543602@newsletter',
+            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
             newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
             serverMessageId: 202,
         },
@@ -278,7 +278,7 @@ async function processAntiLink2(sock, msg) {
 
 ⏳ Remaining: ${remaining}
 
-🛡️ Zenitsu Security System`,
+🛡️ RICH MD Security System`,
                 contextInfo: { mentionedJid: mentionList, ...style }
             }, { quoted: msg });
             return;
@@ -386,7 +386,7 @@ async function antilink2Command(sock, msg, args, jid) {
 
 All Anti-Link V2 warnings have been cleared.
 
-🛡️ Zenitsu Security System`,
+🛡️ RICH MD Security System`,
                     contextInfo: style
                 }, { quoted: msg });
             } else {
@@ -430,7 +430,7 @@ Usage:
 
 ⚠️ Maximum warnings: 3
 
-🛡️ Zenitsu Protection Active`,
+🛡️ RICH MD Protection Active`,
                 contextInfo: style
             }, { quoted: msg });
         }
@@ -446,7 +446,7 @@ Usage:
 
 Anti-Link V2 protection has been deactivated.
 
-🛡️ Zenitsu Security System`,
+🛡️ RICH MD Security System`,
                 contextInfo: style
             }, { quoted: msg });
         }
@@ -467,7 +467,7 @@ Usage:
 .antilink2 off
 .antilink2 reset
 
-🛡️ Zenitsu Security System`,
+🛡️ RICH MD Security System`,
             contextInfo: style
         }, { quoted: msg });
     } catch (error) {

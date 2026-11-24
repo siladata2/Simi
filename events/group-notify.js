@@ -261,7 +261,7 @@ async function groupNotifyEvent(sock, update) {
                 forwardingScore: 540,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363425394543602@newsletter',
+                    newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
                     newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
                     serverMessageId: 202
                 }
@@ -340,7 +340,7 @@ async function groupNotifyCommand(sock, msg, args, jid) {
             forwardingScore: 350,
             isForwarded: true,
             forwardedNewsletterMessageInfo: {
-                newsletterJid: '120363425394543602@newsletter',
+                newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
                 newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
                 serverMessageId: 202
             }

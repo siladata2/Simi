@@ -40,7 +40,7 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
         newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
         serverMessageId: 202,
     },
@@ -125,7 +125,7 @@ async function autostatusCommand(sock, msg, args, jid) {
                     '.autostatus on\n' +
                     '.autostatus off\n' +
                     '.autostatus status\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -139,7 +139,7 @@ async function autostatusCommand(sock, msg, args, jid) {
                     '✅ *Auto Status View Enabled*\n\n' +
                     '👁️ Bot will automatically view all statuses.\n' +
                     '⏱ 5 second delay before each view.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }

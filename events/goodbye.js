@@ -52,7 +52,7 @@ function isOwner(sock, senderJid) {
     const botIds = [];
     if (sock.user?.id) botIds.push(getRawNumber(sock.user.id));
     if (sock.user?.lid) botIds.push(getRawNumber(sock.user.lid));
-    botIds.push(process.env.OWNER_NUMBER || '50935729494');
+    { const ownerNumber = (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, ''); if (ownerNumber) botIds.push(ownerNumber); }
     if (global.subBots instanceof Map) {
         for (const [num] of global.subBots) botIds.push(getRawNumber(num));
     }
@@ -104,7 +104,7 @@ const STYLE = {
     forwardingScore: 540,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
         newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
         serverMessageId: 202,
     },
@@ -375,7 +375,7 @@ async function goodbyeCommand(sock, msg, args, jid) {
                     `📊 *Groups affected:* ${count}\n` +
                     '📢 Goodbye messages are now OFF for all groups.\n\n' +
                     '💡 Use *.goodbye on* to re-enable per group.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -403,7 +403,7 @@ async function goodbyeCommand(sock, msg, args, jid) {
                     '✅ *Goodbye Enabled — All Groups*\n\n' +
                     `📊 *Groups affected:* ${count}\n` +
                     '📢 Goodbye messages are now ON for all groups.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -416,7 +416,7 @@ async function goodbyeCommand(sock, msg, args, jid) {
                     '✅ *Goodbye Enabled*\n\n' +
                     '📢 Goodbye messages are now ON for this group.\n\n' +
                     '💡 *Tip:* .goodbye off all to disable everywhere.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -429,7 +429,7 @@ async function goodbyeCommand(sock, msg, args, jid) {
                     '❌ *Goodbye Disabled*\n\n' +
                     '📢 Goodbye messages are now OFF for this group.\n\n' +
                     '💡 *Tip:* .goodbye off all to disable everywhere.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }

@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 355,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -100,14 +100,14 @@ const APIS = [
 function getLocalFallback(query) {
     const q = query.toLowerCase().trim();
     const responses = {
-        'hello': 'Hello! I\'m Zenitsu AI. How can I assist you today? 🤖',
-        'hi': 'Hi there! 👋 I\'m Zenitsu AI, ready to help!',
-        'bonjour': 'Bonjour! Je suis Zenitsu AI. Comment puis-je vous aider? 🤖',
-        'salut': 'Salut! 😊 Je suis Zenitsu AI, à votre service!',
-        'who are you': 'I\'m Zenitsu AI, an advanced language model! 🤖',
-        'qui es-tu': 'Je suis Zenitsu AI, un modèle de langage avancé! 🤖',
-        'what is your name': 'My name is Zenitsu AI! ⚡',
-        'comment tu t\'appelles': 'Je m\'appelle Zenitsu AI! ⚡',
+        'hello': 'Hello! I\'m RICH MD AI. How can I assist you today? 🤖',
+        'hi': 'Hi there! 👋 I\'m RICH MD AI, ready to help!',
+        'bonjour': 'Bonjour! Je suis RICH MD AI. Comment puis-je vous aider? 🤖',
+        'salut': 'Salut! 😊 Je suis RICH MD AI, à votre service!',
+        'who are you': 'I\'m RICH MD AI, an advanced language model! 🤖',
+        'qui es-tu': 'Je suis RICH MD AI, un modèle de langage avancé! 🤖',
+        'what is your name': 'My name is RICH MD AI! ⚡',
+        'comment tu t\'appelles': 'Je m\'appelle RICH MD AI! ⚡',
     };
     return responses[q] || null;
 }
@@ -122,7 +122,7 @@ module.exports = {
 
         if (!query || query.trim().length < 2) {
             return sock.sendMessage(jid, {
-                text: '🤖 *Zenitsu AI*\n\n' +
+                text: '🤖 *RICH MD AI*\n\n' +
                       '⚡ *Usage:* .ai <your question>\n\n' +
                       '✨ *Examples:*\n' +
                       '• .ai What is AI?\n' +
@@ -137,7 +137,7 @@ module.exports = {
         const cached = getCached(query);
         if (cached) {
             await sock.sendMessage(jid, {
-                text: `🤖 *Zenitsu AI*\n\n` +
+                text: `🤖 *RICH MD AI*\n\n` +
                       `❓ *Q:* ${query.slice(0, 200)}${query.length > 200 ? '...' : ''}\n\n` +
                       `💬 *A:* ${cached}\n\n` +
                       `⚡ _Cached Response_`,
@@ -167,7 +167,7 @@ module.exports = {
                 const response = await axios.get(api.url(query), {
                     timeout: api.timeout,
                     headers: {
-                        'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                        'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
                         'Accept': 'application/json',
                     },
                     validateStatus: (status) => status < 500,
@@ -234,11 +234,11 @@ module.exports = {
 
         // Envoyer la réponse
         await sock.sendMessage(jid, {
-            text: `🤖 *Zenitsu AI*\n\n` +
+            text: `🤖 *RICH MD AI*\n\n` +
                   `❓ *Q:* ${query.slice(0, 200)}${query.length > 200 ? '...' : ''}\n\n` +
                   `💬 *A:* ${formatted}\n\n` +
                   `🔧 *Provider:* ${used}\n` +
-                  `⚡ _Powered by Zenitsu AI_`,
+                  `⚡ _Powered by RICH MD AI_`,
             contextInfo: STYLE,
         }, { quoted: msg });
 

@@ -67,8 +67,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -103,8 +103,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -150,7 +150,7 @@ async function processShazam(sock, msg, jid, audioUrl) {
             replyText += `\n📝 *Lyrics:*\n${maxLyrics}${lyrics.length > 800 ? '...' : ''}\n`;
         }
 
-        replyText += `\n⚡ _Identified by Zenitsu_`;
+        replyText += `\n⚡ _Identified by RICH MD_`;
 
         // Send with cover if available
         if (coverUrl) {
@@ -162,8 +162,8 @@ async function processShazam(sock, msg, jid, audioUrl) {
                         forwardingScore: 350,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202,
                         },
                     },
@@ -175,8 +175,8 @@ async function processShazam(sock, msg, jid, audioUrl) {
                         forwardingScore: 350,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202,
                         },
                     },
@@ -189,8 +189,8 @@ async function processShazam(sock, msg, jid, audioUrl) {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },

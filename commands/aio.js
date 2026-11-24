@@ -35,8 +35,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -326,7 +326,7 @@ async function sendMedias(sock, jid, medias, title, platform, sourceUrl, quotedM
                     (title ? `📌 ${title}\n` : '') +
                     `📱 ${platform}\n` +
                     `🔗 ${sourceUrl}\n\n` +
-                    '⚡ _Zenitsu AIO_',
+                    '⚡ _RICH MD AIO_',
                 contextInfo: STYLE,
             }, { quoted: i === 0 ? quotedMsg : undefined });
             sent = true;
@@ -341,7 +341,7 @@ async function sendMedias(sock, jid, medias, title, platform, sourceUrl, quotedM
                         `📥 *Download Complete*\n\n` +
                         (title ? `📌 ${title}\n` : '') +
                         `📱 ${platform}\n\n` +
-                        '⚡ _Zenitsu AIO_',
+                        '⚡ _RICH MD AIO_',
                     contextInfo: STYLE,
                 }, { quoted: i === 0 ? quotedMsg : undefined });
                 sent = true;
@@ -362,7 +362,7 @@ async function sendMedias(sock, jid, medias, title, platform, sourceUrl, quotedM
                         `📥 *Download Complete*\n\n` +
                         (title ? `📌 ${title}\n` : '') +
                         `📱 ${platform}\n\n` +
-                        '⚡ _Zenitsu AIO_',
+                        '⚡ _RICH MD AIO_',
                     contextInfo: STYLE,
                 });
                 sent = true;
@@ -380,7 +380,7 @@ async function sendMedias(sock, jid, medias, title, platform, sourceUrl, quotedM
                         `📥 *Download Complete (Doc)*\n\n` +
                         (title ? `📌 ${title}\n` : '') +
                         `📱 ${platform}\n\n` +
-                        '⚡ _Zenitsu AIO_',
+                        '⚡ _RICH MD AIO_',
                     contextInfo: STYLE,
                 }, { quoted: i === 0 ? quotedMsg : undefined });
                 sent = true;

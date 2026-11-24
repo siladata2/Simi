@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -124,7 +124,7 @@ module.exports = {
             message += `👥 *Followers:* ${followers}\n`;
             message += `📝 *Description:*\n${description.substring(0, 500)}${description.length > 500 ? '...' : ''}\n\n`;
             message += `🔧 *Source:* ${usedApi}\n`;
-            message += `⚡ _Powered by Zenitsu AI_`;
+            message += `⚡ _Powered by RICH MD AI_`;
 
             // Envoyer avec l'image si disponible
             if (img) {

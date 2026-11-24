@@ -10,8 +10,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 340,
     },
 };
@@ -164,7 +164,7 @@ module.exports = {
                          `👤 *Artist:* ${result.artist}\n\n` +
                          `📝 *Lyrics:*\n${lyrics}\n\n` +
                          `🔧 *Source:* ${usedApi}\n` +
-                         `⚡ _Powered by Cybernova_`;
+                         `⚡ _Powered by RICH MD_`;
 
             // Envoyer avec l'image si disponible
             if (result.image) {

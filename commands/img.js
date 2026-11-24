@@ -2,7 +2,7 @@
 
 /**
  * ╔══════════════════════════════════════════════════════╗
- * ║              COMMAND .image — CybernovA             ║
+ * ║              COMMAND .image — RICH MD             ║
  * ║      Multi-source image search with auto-fallback   ║
  * ╚══════════════════════════════════════════════════════╝
  *
@@ -33,8 +33,8 @@ const CONFIG = {
     VALID_URL       : /^https?:\/\/.{10,}/,
 
     NEWSLETTER: {
-        jid            : '120363425394543602@newsletter',
-        name           : '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        jid            : (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        name           : (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 195
     },
 
@@ -496,7 +496,7 @@ ${getProviderList()}
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`;
+_©RICH MD_`;
 
             return reply(listMessage, true);
         }
@@ -534,7 +534,7 @@ Usage : .image [keyword]
 .image2 list → View all services
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`
+_©RICH MD_`
             );
         }
 
@@ -585,7 +585,7 @@ _©CybernovA_`
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`,
+_©RICH MD_`,
                     true
                 );
             }
@@ -603,7 +603,7 @@ _©CybernovA_`,
 📡 *Source :* ${sources[0]?.split(' (')[0] ?? 'Unknown'}
 🔢 ${totalSent + 1} / ${urls.length}
 ━━━━━━━━━━━━━━━
-_©CybernovA_`;
+_©RICH MD_`;
 
                     await sock.sendMessage(from, {
                         image  : { url: imageUrl },
@@ -642,7 +642,7 @@ ${totalFailed > 0 ? `┃  ⚠️  ${totalFailed} image(s) failed to send` : ''}
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`;
+_©RICH MD_`;
 
             await reply(summaryMessage);
 
@@ -667,7 +667,7 @@ _©CybernovA_`;
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`
+_©RICH MD_`
             );
         }
     }

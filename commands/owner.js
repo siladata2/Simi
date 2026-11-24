@@ -1,44 +1,17 @@
 module.exports = {
     name: 'owner',
-    aliases: ['dev', 'creator', 'z3nitsu', 'contact'],
-    description: 'Affiche les informations du propriétaire',
-
-    async execute({ sock, msg, args, jid, text, config, stats }) {
-        const from = jid || msg?.key?.remoteJid;
-        const owner = '50935729494@s.whatsapp.net';
-
-        if (!from) {
-            console.error('❌ JID non disponible');
-            return;
-        }
-
+    aliases: ['dev', 'creator', 'contact'],
+    description: 'Shows the configured bot owner contact',
+    async execute({ sock, msg, jid }) {
+        const target = jid || msg?.key?.remoteJid;
+        if (!target) return;
         if (msg?.key) {
-            await sock.sendMessage(from, {
-                react: { text: '⚡', key: msg.key }
-            });
+            try { await sock.sendMessage(target, { react: { text: '⚡', key: msg.key } }); } catch (_) {}
         }
-
-        const caption = `╭━━━❲ *CONTACT OWNER* ❳━━━╮
-┃
-┃  👑 *Z3niTsu*
-┃  wa.me/50935948231
-┃  wa.me/${owner.split('@')[0]}
-┃  wa.me/584168698003
-╰━━━━━━━━━━━━━━━━━━━━━━━━━━╯`;
-
-        await sock.sendMessage(from, {
-            image: { url: 'https://iili.io/CFwUcRs.jpg' },
-            caption: caption,
-            contextInfo: {
-                mentionedJid: [owner],
-                forwardingScore: 540,
-                isForwarded: true,
-                forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363425394543602@newsletter',
-                    newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
-                    serverMessageId: 202
-                }
-            }
-        }, { quoted: msg });
+        const number = (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, '');
+        const name = process.env.OWNER_NAME || 'RICH MD Owner';
+        const contact = number ? `\n┃  wa.me/${number}` : '\n┃  Set BOT_OWNER to add contact details';
+        const text = `╭━━━❲ *RICH MD OWNER* ❳━━━╮\n┃\n┃  👑 *${name}*${contact}\n╰━━━━━━━━━━━━━━━━━━━━━━━━━━╯`;
+        await sock.sendMessage(target, { text }, { quoted: msg });
     }
 };

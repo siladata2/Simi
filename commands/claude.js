@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 355,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -116,7 +116,7 @@ module.exports = {
                       '• .Claude What is your model?\n' +
                       '• .claude Write a poem\n' +
                       '• .claude Explain machine learning\n\n' +
-                      '💬 *Powered by Zenitsu(Claude + GPT)*',
+                      '💬 *Powered by RICH MD(Claude + GPT)*',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -153,7 +153,7 @@ module.exports = {
                 const response = await axios.get(api.url(query), {
                     timeout: api.timeout,
                     headers: {
-                        'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                        'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
                         'Accept': 'application/json',
                     },
                     validateStatus: (status) => status < 500,
@@ -223,7 +223,7 @@ module.exports = {
                   `❓ *Q:* ${query.slice(0, 200)}${query.length > 200 ? '...' : ''}\n\n` +
                   `💬 *A:* ${formatted}\n\n` +
                   `🔧 *Provider:* ${used}\n` +
-                  `⚡ _Powered by Zenitsu_`,
+                  `⚡ _Powered by RICH MD_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
 

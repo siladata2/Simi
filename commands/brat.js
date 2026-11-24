@@ -42,7 +42,7 @@ module.exports = {
 ┃  💡 *Examples :*
 ┃  .brat Hello World
 ┃  .brat I love coding
-┃  .bratv Zenitsu Bot
+┃  .bratv RICH MD Bot
 ┃
 ┃  🎯 *Features :*
 ┃  • Generate stylish video
@@ -54,7 +54,7 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━
-_©CybernovA_`;
+_©RICH MD_`;
 
             return sock.sendMessage(from, {
                 text: helpMessage,
@@ -63,8 +63,8 @@ _©CybernovA_`;
                     forwardingScore: 540,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202
                     }
                 }
@@ -182,8 +182,8 @@ _©CybernovA_`;
                     forwardingScore: 540,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202
                     }
                 }
@@ -211,7 +211,7 @@ _©CybernovA_`;
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━
-_©CybernovA_`;
+_©RICH MD_`;
 
             await sock.sendMessage(from, {
                 text: summary
@@ -247,7 +247,7 @@ _©CybernovA_`;
                 errorMessage += `┃  📝 *Error :* ${error.message.substring(0, 50)}\n┃\n┃  💡 *Try again in a few minutes*\n`;
             }
 
-            errorMessage += `┃\n╰━━━━━━━━━━━━━━━━━━━━━━━━╯\n\n━━━━━━━━━━━━━\n_©CybernovA_`;
+            errorMessage += `┃\n╰━━━━━━━━━━━━━━━━━━━━━━━━╯\n\n━━━━━━━━━━━━━\n_©RICH MD_`;
 
             await sock.sendMessage(from, {
                 text: errorMessage

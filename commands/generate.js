@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -165,7 +165,7 @@ module.exports = {
                         '🎨 *AI Generated Image*\n\n' +
                         `📝 *Prompt:* ${prompt.length > 200 ? prompt.slice(0, 200) + '...' : prompt}\n` +
                         `🔧 *Model:* ${usedModel}\n\n` +
-                        '⚡ _Zenitsu_',
+                        '⚡ _RICH MD_',
                     contextInfo: STYLE,
                 }, { quoted: msg });
                 sent = true;
@@ -184,7 +184,7 @@ module.exports = {
                         `🔧 *Model:* ${usedModel}\n` +
                         (result.expires ? '⏳ *Expires in 59 minutes*\n' : '') +
                         `🔗 ${result.url}\n\n` +
-                        '⚡ _Zenitsu_',
+                        '⚡ _RICH MD_',
                     contextInfo: STYLE,
                 }, { quoted: msg });
                 sent = true;
@@ -203,7 +203,7 @@ module.exports = {
                     (result.expires ? '⏳ *Expires in 59 minutes*\n' : '') +
                     `🔗 *Link:* ${result.url}\n\n` +
                     '⚠️ Image sent as link.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }

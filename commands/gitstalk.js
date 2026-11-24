@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -88,7 +88,7 @@ module.exports = {
                 text: '🐙 *GitHub Stalker*\n\n' +
                       '⚡ *Usage:* .gitstalk <username>\n\n' +
                       '✨ *Examples:*\n' +
-                      '.gitstalk zenitsuhashira002\n' +
+                      '.gitstalk octocat\n' +
                       '.gitstalk Mrbeast\n' +
                       '.gitstalk mayelprince\n\n' +
                       '📊 *Shows:* Profile info, repos, followers & more',
@@ -158,7 +158,7 @@ module.exports = {
             message += `🔄 *Updated:* ${new Date(updated).toLocaleDateString('en-US')}\n`;
             message += `🔗 ${url}\n\n`;
             message += `🔧 *Source:* ${usedApi}\n`;
-            message += `⚡ _Powered by Zenitsu AI_`;
+            message += `⚡ _Powered by RICH MD AI_`;
 
             // Envoyer avec l'avatar si disponible
             if (avatar) {

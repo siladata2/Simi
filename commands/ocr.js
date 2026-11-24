@@ -30,7 +30,7 @@ module.exports = {
                     await sock.sendMessage(from, { react: { text: '❓', key: msg.key } });
                 }
                 return sock.sendMessage(from, {
-                    text: '❌ *Usage:* Reply with ".ocr" to a image.\n━━━━━━━━━━━━━━━\n_©CybernovA_'
+                    text: '❌ *Usage:* Reply with ".ocr" to a image.\n━━━━━━━━━━━━━━━\n_©RICH MD_'
                 }, { quoted: msg });
             }
 
@@ -73,7 +73,7 @@ module.exports = {
                     await sock.sendMessage(from, { react: { text: '❌', key: msg.key } });
                 }
                 return sock.sendMessage(from, {
-                    text: '❌ no text\n━━━━━━━━━━━━━━━\n_©CybernovA_'
+                    text: '❌ no text\n━━━━━━━━━━━━━━━\n_©RICH MD_'
                 }, { quoted: msg });
             }
 
@@ -81,7 +81,7 @@ module.exports = {
                 await sock.sendMessage(from, { react: { text: '✅', key: msg.key } });
             }
 
-            // Style Cybernova
+            // Style RICH MD
             const response = `╭━━━━❲ *OCR - TEXT EXTRACTED* ❳━━━━╮
 ┃
 ┃  📝 *Text detected:*
@@ -101,8 +101,8 @@ ${extractedText.trim().split('\n').map(line => `┃  ${line}`).join('\n')}
                     forwardingScore: 540,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202
                     }
                 }
@@ -129,7 +129,7 @@ ${extractedText.trim().split('\n').map(line => `┃  ${line}`).join('\n')}
                 errorMsg += `📝 ${err.message}`;
             }
             
-            errorMsg += '\n\n━━━━━━━━━━━━━━━\n_©CybernovA_';
+            errorMsg += '\n\n━━━━━━━━━━━━━━━\n_©RICH MD_';
 
             await sock.sendMessage(from, {
                 text: errorMsg

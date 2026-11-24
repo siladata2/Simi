@@ -8,8 +8,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -99,7 +99,7 @@ module.exports = {
                         `📱 *Input:* ${input}@lid\n` +
                         `🏷️ *Type:* ${resultType}\n` +
                         `🆔 *JID:* \`${resultJid}\`\n\n` +
-                        '⚡ _Zenitsu_',
+                        '⚡ _RICH MD_',
                     contextInfo: STYLE,
                 }, { quoted: msg });
             }
@@ -133,7 +133,7 @@ module.exports = {
             '.getjid 50912345678\n' +
             '.getjid https://chat.whatsapp.com/xxx\n' +
             '.getjid (reply to message)\n\n' +
-            '⚡ _Zenitsu_';
+            '⚡ _RICH MD_';
 
         await sock.sendMessage(jid, {
             text: text,

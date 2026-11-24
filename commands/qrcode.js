@@ -3,7 +3,7 @@
 // ╔══════════════════════════════════════════════╗
 // ║   QRCODE — Génère un QR code avec ⚡        ║
 // ║   Aucune dépendance externe requise         ║
-// ║   Admin/User · Zenitsu Mini                 ║
+// ║   Admin/User · RICH MD                 ║
 // ╚══════════════════════════════════════════════╝
 
 // Stratégie :
@@ -23,8 +23,8 @@ const NEWSLETTER = {
   forwardingScore: 350,
   isForwarded: true,
   forwardedNewsletterMessageInfo: {
-    newsletterJid: '120363425394543602@newsletter',
-    newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+    newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+    newsletterName: (process.env.BOT_NAME || 'RICH MD'),
     serverMessageId: 202,
   },
 };
@@ -157,7 +157,7 @@ async function handleQrcode(sock, msg, args, jid) {
       newsletterMsg(
         '❌ *Usage :* `.qrcode <texte ou URL>`\n\n' +
         '_Exemple :_ `.qrcode https://github.com`\n' +
-        '_Exemple :_ `.qrcode Zenitsu Mini Bot ⚡`'
+        '_Exemple :_ `.qrcode RICH MD Bot ⚡`'
       ),
       { quoted: msg }
     );

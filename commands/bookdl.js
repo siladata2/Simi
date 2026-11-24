@@ -13,8 +13,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -263,7 +263,7 @@ module.exports = {
                     `📦 *Size:* ${(fileSize / 1048576).toFixed(2)} MB\n` +
                     `📊 *Max:* 20 MB\n\n` +
                     `🔗 *Download manually:* ${found.url}\n\n` +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -288,7 +288,7 @@ module.exports = {
                         '⚠️ *Book Too Large*\n\n' +
                         `📦 *Size:* ${(buffer.length / 1048576).toFixed(2)} MB\n` +
                         `🔗 ${found.url}\n\n` +
-                        '⚡ _Zenitsu_',
+                        '⚡ _RICH MD_',
                     contextInfo: STYLE,
                 }, { quoted: msg });
             }
@@ -318,7 +318,7 @@ module.exports = {
                     `📦 *Size:* ${sizeMB} MB\n` +
                     `📚 *Source:* ${found.source}\n\n` +
                     '🔓 *Public Domain — Free to share*\n\n' +
-                    '⚡ _Zenitsu Book Downloader_',
+                    '⚡ _RICH MD Book Downloader_',
                 contextInfo: STYLE,
             }, { quoted: msg });
 
@@ -332,7 +332,7 @@ module.exports = {
                     '❌ *Download Failed*\n\n' +
                     `📌 *Title:* ${found.title}\n` +
                     `🔗 *Try manually:* ${found.url}\n\n` +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }

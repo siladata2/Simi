@@ -4,8 +4,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -82,7 +82,7 @@ module.exports = {
                     '🖼️ *Group Profile Picture*\n\n' +
                     `📢 *Group:* ${groupName}\n` +
                     `🆔 *JID:* \`${groupJid}\`\n\n` +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
 

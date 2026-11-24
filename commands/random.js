@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -66,7 +66,7 @@ module.exports = {
             await sock.sendMessage(jid, {
                 image: buffer,
                 caption: `🖼️ *Random ${type.charAt(0).toUpperCase() + type.slice(1)}*\n\n` +
-                         `⚡ _Powered by Zenitsu AI_`,
+                         `⚡ _Powered by RICH MD AI_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
 

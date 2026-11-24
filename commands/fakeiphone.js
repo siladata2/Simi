@@ -10,8 +10,8 @@ const STYLE = {
     forwardingScore: 540,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -52,14 +52,14 @@ module.exports = {
                 text: '📱 *Fake iPhone Message Generator*\n\n' +
                       '⚡ *Usage:* .fakeiphone <text>\n\n' +
                       '✨ *Examples:*\n' +
-                      '.fakeiphone Hello Zenitsu\n' +
+                      '.fakeiphone Hello RICH MD\n' +
                       '.fakeiphone This is a test\n' +
                       '.fakeiphone Brat\n\n' +
                       '📌 *Features:*\n' +
                       '• Fake iMessage screenshot\n' +
                       '• Custom text display\n' +
                       '• iPhone style interface\n\n' +
-                      '⚡ _Powered by Cybernova_',
+                      '⚡ _Powered by RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -90,7 +90,7 @@ module.exports = {
                         responseType: 'arraybuffer',
                         timeout: api.timeout,
                         headers: {
-                            'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                            'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
                         },
                     });
 
@@ -123,7 +123,7 @@ module.exports = {
                          `💬 *Text:* ${query}\n` +
                          `🕐 *Time:* ${chatTime}\n` +
                          `🔧 *Source:* ${usedApi}\n\n` +
-                         `⚡ _Powered by Cybernova_`,
+                         `⚡ _Powered by RICH MD_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
 

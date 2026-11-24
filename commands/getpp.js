@@ -29,7 +29,7 @@ module.exports = {
                 let number = args[0].replace(/[^0-9]/g, '');
                 if (number.length < 10) {
                     return sock.sendMessage(from, {
-                        text: '❌ *Invalid number*\n\nUsage: `.getpp 50941612345`\n\n━━━━━━━━━━━━━━━\n_©CybernovA_'
+                        text: '❌ *Invalid number*\n\nUsage: `.getpp 50941612345`\n\n━━━━━━━━━━━━━━━\n_©RICH MD_'
                     }, { quoted: msg });
                 }
                 target = `${number}@s.whatsapp.net`;
@@ -41,7 +41,7 @@ module.exports = {
 
             if (!target) {
                 return sock.sendMessage(from, {
-                    text: '❌ *Cible introuvable*\n\nUtilisez :\n• Répondez à un message\n• Mentionnez quelqu\'un\n• .getpp [numéro]\n\n━━━━━━━━━━━━━━━\n_©CybernovA_'
+                    text: '❌ *Cible introuvable*\n\nUtilisez :\n• Répondez à un message\n• Mentionnez quelqu\'un\n• .getpp [numéro]\n\n━━━━━━━━━━━━━━━\n_©RICH MD_'
                 }, { quoted: msg });
             }
 
@@ -58,7 +58,7 @@ module.exports = {
             } catch {
                 const targetName = target.split('@')[0];
                 return sock.sendMessage(from, {
-                    text: `❌ *Photo introuvable*\n\n👤 @${targetName}\n\nCet utilisateur n'a pas de photo de profil ou a bloqué l'accès.\n\n━━━━━━━━━━━━━━━\n_©CybernovA_`,
+                    text: `❌ *Photo introuvable*\n\n👤 @${targetName}\n\nCet utilisateur n'a pas de photo de profil ou a bloqué l'accès.\n\n━━━━━━━━━━━━━━━\n_©RICH MD_`,
                     mentions: [target]
                 }, { quoted: msg });
             }
@@ -73,7 +73,7 @@ module.exports = {
             const fileSizeKB = (buffer.length / 1024).toFixed(2);
             const targetName = target.split('@')[0];
 
-            // Style Cybernova
+            // Style RICH MD
             const caption = `╭━━━━❲ *PHOTO DE PROFIL* ❳━━━━╮
 ┃
 ┃  👤 *User :* @${targetName}
@@ -84,7 +84,7 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`;
+_©RICH MD_`;
 
             // Envoyer l'image
             await sock.sendMessage(from, {
@@ -96,8 +96,8 @@ _©CybernovA_`;
                     forwardingScore: 540,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202
                     }
                 }
@@ -143,7 +143,7 @@ _©CybernovA_`;
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`;
+_©RICH MD_`;
 
             await sock.sendMessage(from, {
                 text: errorMsg

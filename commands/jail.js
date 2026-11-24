@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -119,7 +119,7 @@ module.exports = {
             const response = await axios.get(url, {
                 responseType: 'arraybuffer',
                 timeout: 15000,
-                headers: { 'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)' },
+                headers: { 'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)' },
             });
             const buffer = Buffer.from(response.data);
 
@@ -133,7 +133,7 @@ module.exports = {
             }
             caption += `🔒 *Reason:* ${randomReason}\n` +
                        `⏳ *Sentence:* ${Math.floor(Math.random() * 30) + 1} years\n\n` +
-                       `⚡ _Powered by Cybernova_`;
+                       `⚡ _Powered by RICH MD_`;
 
             await sock.sendMessage(jid, {
                 image: buffer,

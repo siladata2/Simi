@@ -125,8 +125,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -149,8 +149,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -185,8 +185,8 @@ async function processEnhance(sock, msg, jid, imageUrl) {
                 forwardingScore: 350,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363425394543602@newsletter',
-                    newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                    newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                    newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                     serverMessageId: 202,
                 },
             },
@@ -199,8 +199,8 @@ async function processEnhance(sock, msg, jid, imageUrl) {
         forwardingScore: 350,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-            newsletterJid: '120363425394543602@newsletter',
-            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
             serverMessageId: 202,
         },
     };
@@ -210,7 +210,7 @@ async function processEnhance(sock, msg, jid, imageUrl) {
         try {
             await sock.sendMessage(jid, {
                 image: result.buffer,
-                caption: `🔮 *Enhanced (${usedMethod})*\n\n⚡ _Powered by Zenitsu_`,
+                caption: `🔮 *Enhanced (${usedMethod})*\n\n⚡ _Powered by RICH MD_`,
                 contextInfo,
             }, { quoted: msg });
             sent = true;
@@ -221,7 +221,7 @@ async function processEnhance(sock, msg, jid, imageUrl) {
         try {
             await sock.sendMessage(jid, {
                 image: { url: result.url },
-                caption: `🔮 *Enhanced (${usedMethod})*\n\n⚡ _Powered by Zenitsu_`,
+                caption: `🔮 *Enhanced (${usedMethod})*\n\n⚡ _Powered by RICH MD_`,
                 contextInfo,
             }, { quoted: msg });
             sent = true;

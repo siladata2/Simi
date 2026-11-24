@@ -11,8 +11,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -115,7 +115,7 @@ module.exports = {
                     '📋 *Available Languages:*\n' +
                     `${langList}\n\n` +
                     '💡 Reply to a message with code to convert it.\n\n' +
-                    '⚡ _Zenitsu Script Converter_',
+                    '⚡ _RICH MD Script Converter_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -188,7 +188,7 @@ module.exports = {
                 `📏 *Size:* ${sizeKB} KB\n` +
                 `📝 *Lines:* ${code.split('\n').length}\n\n` +
                 '💡 Open the file or share it directly.\n\n' +
-                '⚡ _Zenitsu Script Converter_',
+                '⚡ _RICH MD Script Converter_',
             contextInfo: STYLE,
         }, { quoted: msg });
 

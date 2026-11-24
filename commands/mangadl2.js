@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 355,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -115,7 +115,7 @@ module.exports = {
                     list += `\n_... and ${chapters.length - 100} more chapters_\n`;
                 }
 
-                list += '\n📌 .mangadl2 chap <number>\n⚡ _Zenitsu_';
+                list += '\n📌 .mangadl2 chap <number>\n⚡ _RICH MD_';
 
                 await sock.sendMessage(jid, { text: list, contextInfo: STYLE }, { quoted: msg });
                 try { await sock.sendMessage(jid, { react: { text: '✅', key: msg.key } }); } catch (_) {}
@@ -282,7 +282,7 @@ module.exports = {
                 await sock.sendMessage(jid, {
                     text: `✅ *Ch. ${chapNum}* — ${sent}/${pageCount} pages (${successRate}%)\n` +
                           `${failed > 0 ? `⚠️ Failed: ${failed} pages\n` : ''}` +
-                          `⚡ _Zenitsu_`,
+                          `⚡ _RICH MD_`,
                     contextInfo: STYLE,
                 }, { quoted: msg });
 
@@ -345,7 +345,7 @@ module.exports = {
                 reply += `\n_... and ${mangas.length - 100} more results_\n`;
             }
 
-            reply += '\n📌 .mangadl2 <number>\n⏳ 5 min timeout\n⚡ _Zenitsu_';
+            reply += '\n📌 .mangadl2 <number>\n⏳ 5 min timeout\n⚡ _RICH MD_';
 
             await sock.sendMessage(jid, { text: reply, contextInfo: STYLE }, { quoted: msg });
             try { await sock.sendMessage(jid, { react: { text: '✅', key: msg.key } }); } catch (_) {}

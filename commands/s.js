@@ -16,14 +16,14 @@ const execAsync = promisify(exec);
 // ═══════════════════════════════════════
 
 const DEFAULT_PACK = '🇿enitsu Mini';
-const DEFAULT_AUTHOR = '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟';
+const DEFAULT_AUTHOR = (process.env.BOT_NAME || 'RICH MD');
 
 const CYBERNOVA_CONTEXT = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -198,7 +198,7 @@ module.exports = {
                     '.s <pack> <author>\n' +
                     'Reply to an image/video/sticker\n\n' +
                     '✨ *Examples:*\n' +
-                    '.s Zenitsu Hashira\n' +
+                    '.s RICH MD\n' +
                     '.s MyPack MyName\n\n' +
                     '💡 Supports images, videos, GIFs.\n' +
                     '📦 Pack/author visible in sticker info.',

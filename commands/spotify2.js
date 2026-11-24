@@ -95,8 +95,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -116,8 +116,8 @@ module.exports = {
                         forwardingScore: 350,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202,
                         },
                     },
@@ -131,8 +131,8 @@ module.exports = {
                         forwardingScore: 350,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202,
                         },
                     },
@@ -183,8 +183,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -213,8 +213,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -261,7 +261,7 @@ async function downloadSpotify(sock, msg, jid, track) {
 
         const sizeMB = (buffer.length / (1024 * 1024)).toFixed(2);
         const safeTitle = cleanTitle(title);
-        const fileName = `${safeTitle}_zenitsu.mp3`;
+        const fileName = `${safeTitle}_rich_md.mp3`;
 
         // 1) Envoi de l’image + métadonnées
         if (thumbnail && thumbnail.startsWith('http')) {
@@ -318,8 +318,8 @@ async function downloadSpotify(sock, msg, jid, track) {
                 forwardingScore: 350,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363425394543602@newsletter',
-                    newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                    newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                    newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                     serverMessageId: 202,
                 },
             },

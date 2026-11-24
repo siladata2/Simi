@@ -5,7 +5,7 @@
 // ╔══════════════════════════════════════════════╗
 // ║   IMG — Web image search                    ║
 // ║   Pinterest → Bing Images fallback          ║
-// ║   No API key required · Zenitsu Mini        ║
+// ║   No API key required · RICH MD        ║
 // ╚══════════════════════════════════════════════╝
 
 // Comment ça marche :

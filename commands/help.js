@@ -10,14 +10,14 @@ const path = require('path');
 
 const HELP_FILE = path.join(__dirname, 'help.txt');
 
-const DEFAULT_PROMPT = 'You are a helpful assistant for the Zenitsu Mini WhatsApp Bot. Help users with bot commands and features.';
+const DEFAULT_PROMPT = 'You are a helpful assistant for the RICH MD WhatsApp Bot. Help users with bot commands and features.';
 
 const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -121,13 +121,13 @@ function getLocalResponse(query) {
     const q = query.toLowerCase();
 
     if (q.includes('owner') || q.includes('who made') || q.includes('creator')) {
-        return '👑 Zenitsu Mini is owned by **Zenitsu Hashira** (+50935729494). Powered by CyberNova Team.';
+        return process.env.BOT_OWNER || process.env.OWNER_NUMBER ? `👑 RICH MD owner: ${process.env.OWNER_NAME || 'configured owner'} (wa.me/${(process.env.BOT_OWNER || process.env.OWNER_NUMBER).replace(/\D/g, '')}).` : '👑 RICH MD owner contact has not been configured.';
     }
     if (q.includes('channel') || q.includes('newsletter')) {
-        return '📢 Join our channel **CyberNova**: https://whatsapp.com/channel/0029Vb8BKWwH5JLxq1ef1R43';
+        return `📢 RICH MD channel JID: ${process.env.CHANNEL_JID || '120363402325089913@newsletter'}. A public channel link has not been configured.`;
     }
     if (q.includes('command') || q.includes('feature') || q.includes('what can')) {
-        return '⚡ Zenitsu Mini has 60+ commands: Downloader, AI, Search, Tools, Group Management, Owner. Type .menu to see all!';
+        return '⚡ RICH MD includes downloader, AI, search, media, group-management, and utility commands. Type .menu to see the command list!';
     }
     if (q.includes('sticker') || q.includes('take')) {
         return '🎨 Reply to an image/video with **.sticker** to create. Use **.take a:Name** for author only.';
@@ -168,7 +168,7 @@ module.exports = {
                     '.help What commands are available?\n' +
                     '.help Who is the owner?\n\n' +
                     '💡 I can help with bot features, commands, and info.\n\n' +
-                    '⚡ _Zenitsu Help_',
+                    '⚡ _RICH MD Help_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -179,7 +179,7 @@ module.exports = {
         const localReply = getLocalResponse(query);
         if (localReply) {
             return sock.sendMessage(jid, {
-                text: `💬 *Help Assistant*\n\n${localReply}\n\n⚡ _Zenitsu Help_`,
+                text: `💬 *Help Assistant*\n\n${localReply}\n\n⚡ _RICH MD Help_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -207,8 +207,8 @@ module.exports = {
                     '💬 *Help Assistant*\n\n' +
                     '⚡ I couldn\'t process your question right now.\n' +
                     'Type **.menu** to see all commands, or try again.\n\n' +
-                    '📢 Channel: https://whatsapp.com/channel/0029Vb8BKWwH5JLxq1ef1R43\n\n' +
-                    '⚡ _Zenitsu Help_',
+                    `📢 Channel JID: ${process.env.CHANNEL_JID || '120363402325089913@newsletter'}\n\n` +
+                    '⚡ _RICH MD Help_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -218,7 +218,7 @@ module.exports = {
                 '💬 *Help Assistant*\n\n' +
                 `❓ *Q:* ${query.length > 200 ? query.slice(0, 200) + '...' : query}\n\n` +
                 `💡 *A:* ${reply}\n\n` +
-                '⚡ _Zenitsu Help_',
+                '⚡ _RICH MD Help_',
             contextInfo: STYLE,
         }, { quoted: msg });
 

@@ -11,8 +11,8 @@ const MAX_SIZE_MB = 60;
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
 const NEWSLETTER = {
-    newsletterJid: '120363425394543602@newsletter',
-    newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+    newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+    newsletterName: (process.env.BOT_NAME || 'RICH MD'),
     serverMessageId: 202,
 };
 
@@ -214,7 +214,7 @@ module.exports = {
                     `🎬 *${safeTitle}*\n\n` +
                     `📦 *Size:* ${sizeMB} MB\n` +
                     `🔗 ${input}\n\n` +
-                    `⚡ _Downloaded by Zenitsu_`;
+                    `⚡ _Downloaded by RICH MD_`;
 
                 // 1) Info card (thumbnail if available)
                 if (media.thumbnail) {
@@ -279,7 +279,7 @@ module.exports = {
                     caption:
                         `🖼️ *${safeTitle}*\n\n` +
                         `🔗 ${input}\n\n` +
-                        `⚡ _Downloaded by Zenitsu_`,
+                        `⚡ _Downloaded by RICH MD_`,
                     contextInfo: buildNewsletterContext(),
                 }, { quoted: msg });
             }
@@ -296,7 +296,7 @@ module.exports = {
                         `🎵 *${safeTitle}*\n\n` +
                         `📦 *Size:* ${sizeMB} MB\n` +
                         `🔗 ${input}\n\n` +
-                        `⚡ _Downloaded by Zenitsu_`,
+                        `⚡ _Downloaded by RICH MD_`,
                     contextInfo: buildNewsletterContext(),
                 }, { quoted: msg });
 

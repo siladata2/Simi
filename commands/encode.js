@@ -5,8 +5,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -20,7 +20,7 @@ module.exports = {
         const query = args.join(' ');
         if (!query || query.trim().length < 1) {
             return sock.sendMessage(jid, {
-                text: '🔢 *Binary Encoder*\n\n⚡ *Usage:* .encode <text>\n\n✨ *Examples:*\n.encode hello\n.encode Zenitsu',
+                text: '🔢 *Binary Encoder*\n\n⚡ *Usage:* .encode <text>\n\n✨ *Examples:*\n.encode hello\n.encode RICH MD',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -35,7 +35,7 @@ module.exports = {
             const binary = data?.binary || data?.result || 'Error encoding';
 
             await sock.sendMessage(jid, {
-                text: `🔢 *Binary Encoder*\n\n💬 *Text:* ${query}\n\n📟 *Binary:*\n${binary}\n\n⚡ _Zenitsu AI_`,
+                text: `🔢 *Binary Encoder*\n\n💬 *Text:* ${query}\n\n📟 *Binary:*\n${binary}\n\n⚡ _RICH MD AI_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
 

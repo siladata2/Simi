@@ -19,8 +19,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -28,8 +28,8 @@ module.exports = {
         }
 
         const senderJid = msg.key.participant || msg.key.remoteJid;
-        const ownerNumber = process.env.OWNER_NUMBER || '50935729494';
-        const isOwner = senderJid.includes(ownerNumber);
+        const ownerNumber = (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, '');
+        const isOwner = Boolean(ownerNumber) && senderJid.includes(ownerNumber);
 
         // ── Get group metadata ──
         let metadata;
@@ -42,8 +42,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -61,8 +61,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -83,13 +83,13 @@ module.exports = {
                 text:
                     '🤖 *Bot must be admin!*\n\n' +
                     'Promote the bot to admin first.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -111,13 +111,13 @@ module.exports = {
                 text:
                     '⚠️ *No members to kick!*\n\n' +
                     'All members are admins.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -141,13 +141,13 @@ module.exports = {
                         'Type *${prefix}kickall force* to confirm\n' +
                         'or *{prefix}kickall cancel* to abort.\n\n' +
                         '⏳ *This will expire in 30 seconds.*\n\n' +
-                        '⚡ _Zenitsu Group Management_',
+                        '⚡ _RICH MD Group Management_',
                     contextInfo: {
                         forwardingScore: 350,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202,
                         },
                     },
@@ -188,8 +188,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -234,8 +234,8 @@ async function executeKickAll(sock, jid, membersToKick, originalMsg) {
                 forwardingScore: 350,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363425394543602@newsletter',
-                    newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                    newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                    newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                     serverMessageId: 202,
                 },
             },
@@ -271,13 +271,13 @@ async function executeKickAll(sock, jid, membersToKick, originalMsg) {
                         `✅ *Kicked:* ${kicked}\n` +
                         `❌ *Failed:* ${failed}\n` +
                         `⏳ *Remaining:* ${total - (i + 1)}\n\n` +
-                        '⚡ _Zenitsu Group Management_',
+                        '⚡ _RICH MD Group Management_',
                     contextInfo: {
                         forwardingScore: 350,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202,
                         },
                     },
@@ -303,13 +303,13 @@ async function executeKickAll(sock, jid, membersToKick, originalMsg) {
                 `❌ *Failed:* ${failed}\n` +
                 `📦 *Total:* ${total}\n\n` +
                 '👑 *Admins and bot were kept.*\n\n' +
-                '⚡ _Zenitsu Group Management_',
+                '⚡ _RICH MD Group Management_',
             contextInfo: {
                 forwardingScore: 350,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363425394543602@newsletter',
-                    newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                    newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                    newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                     serverMessageId: 202,
                 },
             },

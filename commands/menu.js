@@ -9,11 +9,11 @@ const axios = require('axios');
 // ═══════════════════════════════════════
 
 const BOT_INFO = {
-    name: '𝐙𝐞𝐧𝐢𝐭𝐬𝐮 𝐌𝐢𝐧𝐢',
-    owner: '50935729494',
-    channelName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
-    channelJid: '120363425394543602@newsletter',
-    description: 'ᴄʏʙᴇʀɴᴏᴠᴀ 𝐗 𝙈𝙀𝙏Α',
+    name: process.env.BOT_NAME || 'RICH MD',
+    owner: (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, ''),
+    channelName: (process.env.BOT_NAME || 'RICH MD'),
+    channelJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+    description: 'RICH MD WhatsApp automation',
     version: '4.1.1',
 };
 
@@ -186,7 +186,7 @@ async function handleMediaManagement(sock, msg, args, jid) {
             listText += `${index + 1}. ${item.substring(0, 80)}${item.length > 80 ? '...' : ''}\n`;
         });
 
-        listText += `\n━━━━━━━━━━━━━━━\n_©CybernovA_`;
+        listText += `\n━━━━━━━━━━━━━━━\n_©RICH MD_`;
 
         return sock.sendMessage(jid, {
             text: listText,

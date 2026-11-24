@@ -10,8 +10,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -97,8 +97,8 @@ function isBotOwner(sock, senderJid) {
     }
 
     // 4. Vérifier l'owner configuré (via CONFIG ou process.env)
-    const ownerNumber = process.env.OWNER_NUMBER || '50935729494';
-    if (senderRaw === ownerNumber || senderNormalized === `${ownerNumber}@s.whatsapp.net`) {
+    const ownerNumber = (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, '');
+    if (ownerNumber && (senderRaw === ownerNumber || senderNormalized === `${ownerNumber}@s.whatsapp.net`)) {
         return true;
     }
 
@@ -298,7 +298,7 @@ module.exports = {
                     `📁 *Type:* ${fileInfo.type}\n` +
                     `📏 *Size:* ${sizeKB} KB\n` +
                     `📊 *Lines:* ${lines}\n\n` +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
 

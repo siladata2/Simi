@@ -30,12 +30,12 @@ function formatUptime(ms) {
 // ═══════════════════════════════════════
 
 const BOT_INFO = {
-    name: '𝙯𝙚𝙣𝙞𝙩𝙨𝙪 ᗰᎥᑎᎥ',
-    owner: '50935729494',
-    ownerName: '🇿єиιтѕυ  Ⱨ ɪʀᴀ',
-    channelName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
-    channelJid: '120363425394543602@newsletter',
-    channelUrl: 'https://whatsapp.com/channel/0029Vb8BKWwH5JLxq1ef1R43',
+    name: process.env.BOT_NAME || 'RICH MD',
+    owner: (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, ''),
+    ownerName: process.env.OWNER_NAME || 'RICH MD Owner',
+    channelName: (process.env.BOT_NAME || 'RICH MD'),
+    channelJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+    channelUrl: process.env.BOT_CHANNEL_LINK || '',
     menuImage: 'https://files.catbox.moe/uklx8n.jpg',
     menuAudio: 'https://files.catbox.moe/9ypbfk.mpeg',
     thumbnail: 'https://files.catbox.moe/uklx8n.jpg',
@@ -65,7 +65,7 @@ module.exports = {
                         vcard: `BEGIN:VCARD
 VERSION:3.0
 FN:${BOT_INFO.name}
-ORG:Zenitsu Mini Bot;
+ORG:RICH MD Bot;
 TITLE:Official WhatsApp Bot — Verified
 TEL;type=CELL;type=VOICE;waid=${BOT_INFO.owner}:+${BOT_INFO.owner}
 END:VCARD`,

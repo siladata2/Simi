@@ -10,8 +10,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -153,7 +153,7 @@ module.exports = {
                     // Envoyer l'image
                     await sock.sendMessage(jid, {
                         image: buffer,
-                        caption: `📌 *${i + 1}/${selected.length}*\n🔍 ${query}\n${item.title ? `📝 ${item.title.slice(0, 80)}\n` : ''}⚡ _Zenitsu_`,
+                        caption: `📌 *${i + 1}/${selected.length}*\n🔍 ${query}\n${item.title ? `📝 ${item.title.slice(0, 80)}\n` : ''}⚡ _RICH MD_`,
                         contextInfo: STYLE,
                     }, { quoted: i === 0 ? msg : undefined });
 

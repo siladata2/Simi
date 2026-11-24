@@ -15,8 +15,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -60,7 +60,7 @@ module.exports = {
                 },
                 timeout: 15000,
                 headers: {
-                    'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                    'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
                 },
             });
 
@@ -90,7 +90,7 @@ module.exports = {
                                  `📌 *Title:* ${title.slice(0, 80)}${title.length > 80 ? '...' : ''}\n` +
                                  `🔍 *Search:* ${query}\n` +
                                  (contextLink ? `🔗 *Source:* ${contextLink.slice(0, 60)}...\n` : '') +
-                                 `\n⚡ _Powered by Zenitsu_`,
+                                 `\n⚡ _Powered by RICH MD_`,
                         contextInfo: STYLE,
                     }, { quoted: msg });
                     sentCount++;

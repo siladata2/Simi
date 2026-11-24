@@ -19,8 +19,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -394,7 +394,7 @@ async function downloadMusic(sock, msg, jid, track, query) {
             audio: audioBuffer,
             mimetype: 'audio/mpeg',
             ptt: false,
-            fileName: `${title.slice(0, 100)}_zenitsu.mp3`,
+            fileName: `${title.slice(0, 100)}_rich_md.mp3`,
             contextInfo: {
                 externalAdReply: {
                     title: title.slice(0, 100),
@@ -419,7 +419,7 @@ async function downloadMusic(sock, msg, jid, track, query) {
                 (duration ? `⏱ *Duration:* ${formatDuration(duration)}\n` : '') +
                 `📦 *Size:* ${sizeMB} MB\n` +
                 `🔧 *Source:* ${usedApi}\n\n` +
-                `⚡ _Powered by Zenitsu AI_`,
+                `⚡ _Powered by RICH MD AI_`,
             contextInfo: STYLE,
         }, { quoted: msg });
 

@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 355,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -122,7 +122,7 @@ module.exports = {
                 text: `🐋 *DeepSeek AI*\n\n` +
                       `❓ *Q:* ${query.slice(0, 200)}${query.length > 200 ? '...' : ''}\n\n` +
                       `💬 *A:* ${cached}\n\n` +
-                      `⚡ _Zenitsu AI (cached)_`,
+                      `⚡ _RICH MD AI (cached)_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
             try { await sock.sendMessage(jid, { react: { text: '⚡', key: msg.key } }); } catch (_) {}
@@ -147,7 +147,7 @@ module.exports = {
                 const response = await axios.get(api.url(query), {
                     timeout: api.timeout,
                     headers: {
-                        'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                        'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
                         'Accept': 'application/json',
                     },
                     validateStatus: (status) => status < 500,
@@ -216,7 +216,7 @@ module.exports = {
                   `❓ *Q:* ${query.slice(0, 200)}${query.length > 200 ? '...' : ''}\n\n` +
                   `💬 *A:* ${formatted}\n\n` +
                   `🔧 *Provider:* ${used}\n` +
-                  `⚡ _Powered by Zenitsu AI_`,
+                  `⚡ _Powered by RICH MD AI_`,
             contextInfo: STYLE,
         }, { quoted: msg });
 

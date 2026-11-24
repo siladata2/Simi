@@ -10,8 +10,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -237,7 +237,7 @@ module.exports = {
             }
             caption += `📝 *Prompt:* ${prompt}\n` +
                        `🔧 *Source:* ${usedApi}\n\n` +
-                       `⚡ _Powered by Cybernova_`;
+                       `⚡ _Powered by RICH MD_`;
 
             await sock.sendMessage(jid, {
                 image: buffer,

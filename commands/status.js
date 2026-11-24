@@ -2,7 +2,7 @@
 
 /**
  * ╔══════════════════════════════════════════════════════════╗
- * ║           COMMAND .status — CybernovA                   ║
+ * ║           COMMAND .status — RICH MD                   ║
  * ║   Full system diagnostic for Render-deployed bots       ║
  * ╚══════════════════════════════════════════════════════════╝
  *
@@ -64,8 +64,8 @@ const CONFIG = {
     },
 
     NEWSLETTER: {
-        jid            : '120363425394543602@newsletter',
-        name           : '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        jid            : (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        name           : (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 195
     }
 };
@@ -231,7 +231,7 @@ const getNetwork = async () => {
             await axios.get(target.url, {
                 timeout: 5000,
                 headers: target.headers ?? {
-                    'User-Agent': 'CybernovA-StatusBot/1.0'
+                    'User-Agent': 'RICH MD-StatusBot/1.0'
                 },
                 validateStatus: (s) => s < 500
             });
@@ -374,10 +374,10 @@ const runMiniTests = async () => {
         const t0   = performance.now();
         const file = path.join(os.tmpdir(), `.syscheck_${Date.now()}`);
         try {
-            fs.writeFileSync(file, 'CybernovA');
+            fs.writeFileSync(file, 'RICH MD');
             const content = fs.readFileSync(file, 'utf8');
             fs.unlinkSync(file);
-            const ok = content === 'CybernovA';
+            const ok = content === 'RICH MD';
             tests.push({ name: 'FS write/read/del', ok, latency: ms(t0) });
         } catch (e) {
             if (fs.existsSync(file)) try { fs.unlinkSync(file); } catch (_) {}
@@ -417,7 +417,7 @@ const runMiniTests = async () => {
         const t0 = performance.now();
         try {
             const crypto = require('crypto');
-            const hash   = crypto.createHash('sha256').update('CybernovA').digest('hex');
+            const hash   = crypto.createHash('sha256').update('RICH MD').digest('hex');
             const ok     = hash.length === 64;
             tests.push({ name: 'Crypto SHA-256',    ok, latency: ms(t0) });
         } catch (e) {
@@ -671,7 +671,7 @@ ${line}
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`
+_©RICH MD_`
     );
 };
 
@@ -730,7 +730,7 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`,
+_©RICH MD_`,
                 true
             );
         }
@@ -790,7 +790,7 @@ _©CybernovA_`,
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 ━━━━━━━━━━━━━━━
-_©CybernovA_`
+_©RICH MD_`
             );
         }
     }

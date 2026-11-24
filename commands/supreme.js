@@ -5,8 +5,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -20,7 +20,7 @@ module.exports = {
         const query = args.join(' ');
         if (!query || query.trim().length < 1) {
             return sock.sendMessage(jid, {
-                text: '👑 *Supreme Logo Generator*\n\n⚡ *Usage:* .supreme <text>\n\n✨ *Examples:*\n.supreme Zenitsu\n.supreme Bot',
+                text: '👑 *Supreme Logo Generator*\n\n⚡ *Usage:* .supreme <text>\n\n✨ *Examples:*\n.supreme RICH MD\n.supreme Bot',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -34,7 +34,7 @@ module.exports = {
 
             await sock.sendMessage(jid, {
                 image: buffer,
-                caption: `👑 *Supreme Logo*\n\n💬 ${query}\n\n⚡ _Zenitsu AI_`,
+                caption: `👑 *Supreme Logo*\n\n💬 ${query}\n\n⚡ _RICH MD AI_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
 

@@ -19,7 +19,7 @@ module.exports = {
                 });
             }
             return sock.sendMessage(from, { 
-                text: "❌ *Only group*\\n\n━━━━━━━━━━━━━━━\n_©CybernovA_", 
+                text: "❌ *Only group*\\n\n━━━━━━━━━━━━━━━\n_©RICH MD_", 
                 quoted: msg 
             });
         }
@@ -49,8 +49,8 @@ module.exports = {
                 }, { quoted: msg });
             }
 
-            // Texte principal avec style Cybernova
-            let customText = args.join(" ") || "모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟";
+            // Texte principal avec style RICH MD
+            let customText = args.join(" ") || (process.env.BOT_NAME || 'RICH MD');
             
             const header = `╭━━━━❲ *TAGALL - MENTION* ❳━━━━╮
 ┃
@@ -73,7 +73,7 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 *𝙛𝙤𝙡𝙡𝙤𝙬 𝙩𝙝𝙚 𝙘𝙝𝙖𝙣𝙣𝙚𝙡 ツ , 𝙧𝙚𝙨𝙥𝙚𝙘𝙩 𝙖𝙙𝙢𝙞𝙣𝙨 ♕, 𝙨𝙢𝙞𝙡𝙚 ㋡*
-_©CybernovA_`;
+_©RICH MD_`;
 
             // Combiner le tout
             let fullMessage = header + '\n' + mentionsList + footer;
@@ -101,8 +101,8 @@ _©CybernovA_`;
                     forwardingScore: 540,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202
                     }
                 }
@@ -119,8 +119,8 @@ _©CybernovA_`;
                         forwardingScore: 540,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202
                         }
                     }
@@ -155,7 +155,7 @@ _©CybernovA_`;
                 errorMsg += `💥 *Error*\n\n${error.message}_`;
             }
             
-            errorMsg += '\n\n━━━━━━━━━━━━━━━\n_©CybernovA_';
+            errorMsg += '\n\n━━━━━━━━━━━━━━━\n_©RICH MD_';
             
             await sock.sendMessage(from, {
                 text: errorMsg

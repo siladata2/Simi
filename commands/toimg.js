@@ -64,8 +64,8 @@ module.exports = {
                     forwardingScore: 350,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202,
                     },
                 },
@@ -121,13 +121,13 @@ module.exports = {
                     caption:
                         `🖼️ *Sticker → GIF*\n\n` +
                         `📏 Size: ${sizeKB} KB\n` +
-                        `⚡ Converted by Zenitsu`,
+                        `⚡ Converted by RICH MD`,
                     contextInfo: {
                         forwardingScore: 350,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202,
                         },
                     },
@@ -140,13 +140,13 @@ module.exports = {
                     caption:
                         `🖼️ *Sticker → Image*\n\n` +
                         `📏 Size: ${sizeKB} KB\n` +
-                        `⚡ Converted by Zenitsu`,
+                        `⚡ Converted by RICH MD`,
                     contextInfo: {
                         forwardingScore: 350,
                         isForwarded: true,
                         forwardedNewsletterMessageInfo: {
-                            newsletterJid: '120363425394543602@newsletter',
-                            newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                            newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                            newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                             serverMessageId: 202,
                         },
                     },
@@ -187,8 +187,8 @@ module.exports = {
                             forwardingScore: 350,
                             isForwarded: true,
                             forwardedNewsletterMessageInfo: {
-                                newsletterJid: '120363425394543602@newsletter',
-                                newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                                newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                                newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                                 serverMessageId: 202,
                             },
                         },
@@ -206,8 +206,8 @@ module.exports = {
                             forwardingScore: 350,
                             isForwarded: true,
                             forwardedNewsletterMessageInfo: {
-                                newsletterJid: '120363425394543602@newsletter',
-                                newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                                newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                                newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                                 serverMessageId: 202,
                             },
                         },

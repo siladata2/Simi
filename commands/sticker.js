@@ -46,7 +46,7 @@ const getDimensions = async (filePath) => {
 const imageToSticker = async (inputPath, outputPath, options = {}) => {
     const {
         quality = 80,
-        pack = 'ZenitsuBot',
+        pack = 'RICH MDBot',
         author = 'Z3niTsu'
     } = options;
 
@@ -66,8 +66,8 @@ const videoToSticker = async (inputPath, outputPath, options = {}) => {
         duration = 10,
         quality = 70,
         fps = 15,
-        pack = 'ZenitsuBot2',
-        author = 'Zenitsu'
+        pack = 'RICH MDBot2',
+        author = 'RICH MD'
     } = options;
 
     const dims = await getDimensions(inputPath);
@@ -108,8 +108,8 @@ module.exports = {
             }
 
             // Analyser les arguments
-            let packName = 'ZenitsuBot';
-            let authorName = 'Zenitsu';
+            let packName = 'RICH MDBot';
+            let authorName = 'RICH MD';
             let quality = 80;
 
             for (const arg of args) {

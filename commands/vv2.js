@@ -10,8 +10,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -64,8 +64,8 @@ function isOwnerOfThisBot(sock, senderJid) {
     } catch (_) {}
 
     // Fallback : owner configuré
-    const ownerNumber = process.env.OWNER_NUMBER || '50935729494';
-    if (senderRaw === ownerNumber) return true;
+    const ownerNumber = (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, '');
+    if (ownerNumber && senderRaw === ownerNumber) return true;
 
     return false;
 }
@@ -137,7 +137,7 @@ module.exports = {
                 (caption ? `📝 *Caption:* ${caption}\n` : '') +
                 `📦 *Size:* ${sizeMB} MB\n` +
                 `🕒 *Saved:* ${savedAt}\n\n` +
-                '⚡ _Zenitsu View-Once Saver_';
+                '⚡ _RICH MD View-Once Saver_';
 
             // Envoyer le média vers le bot
             if (mediaType === 'image') {

@@ -10,8 +10,8 @@ const STYLE = {
     forwardingScore: 540,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 340,
     },
 };
@@ -329,7 +329,7 @@ module.exports = {
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
 _⚡ Qualité maximale • Sans watermark_
-_©CybernovA_`;
+_©RICH MD_`;
 
             // ═══════════════════════════════════
             // ENVOI DE LA MINIATURE AVEC INFOS
@@ -386,7 +386,7 @@ _©CybernovA_`;
                         await sock.sendMessage(from, {
                             image: imageBuffers[i],
                             caption: i === imageBuffers.length - 1 
-                                ? `📸 *Photo ${i + 1}/${imageBuffers.length}*\n\n_©CybernovA_` 
+                                ? `📸 *Photo ${i + 1}/${imageBuffers.length}*\n\n_©RICH MD_` 
                                 : `📸 *Photo ${i + 1}/${imageBuffers.length}*`,
                             contextInfo: STYLE,
                         });
@@ -403,7 +403,7 @@ _©CybernovA_`;
                 // Envoyer la vidéo
                 await sock.sendMessage(from, {
                     video: { url: tiktokData.videoUrl },
-                    caption: `🎬 *Vidéo TikTok*\n\n👤 @${tiktokData.author}\n🎵 ${tiktokData.musicTitle?.substring(0, 50) || 'Musique'}\n⏱️ ${formatDuration(tiktokData.duration)}\n\n━━━━━━━━━━━━━━━\n_©CybernovA_`,
+                    caption: `🎬 *Vidéo TikTok*\n\n👤 @${tiktokData.author}\n🎵 ${tiktokData.musicTitle?.substring(0, 50) || 'Musique'}\n⏱️ ${formatDuration(tiktokData.duration)}\n\n━━━━━━━━━━━━━━━\n_©RICH MD_`,
                     mimetype: 'video/mp4',
                     contextInfo: STYLE,
                 });
@@ -422,7 +422,7 @@ _©CybernovA_`;
                         audio: musicBuffer,
                         mimetype: 'audio/mp4',
                         ptt: false,
-                        caption: `🎵 *Musique TikTok*\n\n🎶 Titre : ${tiktokData.musicTitle}\n👤 Artiste : ${tiktokData.musicAuthor || 'Inconnu'}\n\n━━━━━━━━━━━━━━━\n_©CybernovA_`,
+                        caption: `🎵 *Musique TikTok*\n\n🎶 Titre : ${tiktokData.musicTitle}\n👤 Artiste : ${tiktokData.musicAuthor || 'Inconnu'}\n\n━━━━━━━━━━━━━━━\n_©RICH MD_`,
                         contextInfo: STYLE,
                     });
                 } catch (err) {
@@ -446,7 +446,7 @@ _©CybernovA_`;
                 `• Taille : ${tiktokData.size ? (tiktokData.size / 1024 / 1024).toFixed(2) + ' MB' : 'Non spécifiée'}\n` +
                 `• Vues : ${formatNumber(tiktokData.views)}\n` +
                 `• Likes : ${formatNumber(tiktokData.likes)}\n\n` +
-                `_©CybernovA_`;
+                `_©RICH MD_`;
 
             await sock.sendMessage(from, {
                 text: finalMsg,
@@ -475,7 +475,7 @@ _©CybernovA_`;
                 errorMsg += `💥 *Erreur technique*\n\n${err.message}\n\n_Réessaie plus tard ou avec un autre lien._`;
             }
             
-            errorMsg += '\n\n━━━━━━━━━━━━━━━\n_©CybernovA_';
+            errorMsg += '\n\n━━━━━━━━━━━━━━━\n_©RICH MD_';
             
             await sock.sendMessage(from, {
                 text: errorMsg,

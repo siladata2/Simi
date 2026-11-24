@@ -11,7 +11,7 @@ const execFileAsync = promisify(execFile);
 
 const STYLE = {
     forwardingScore: 350, isForwarded: true,
-    forwardedNewsletterMessageInfo: { newsletterJid: '120363425394543602@newsletter', newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟', serverMessageId: 202 },
+    forwardedNewsletterMessageInfo: { newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'), newsletterName: (process.env.BOT_NAME || 'RICH MD'), serverMessageId: 202 },
 };
 
 function locateMedia(msg) {
@@ -133,7 +133,7 @@ module.exports = {
 
         try {
             const { packname, author } = parseArgs(args);
-            if (!packname && !author) return sock.sendMessage(jid, { text: '⚠️ Specify author or packname.\nExample: .take a:Zenitsu', contextInfo: STYLE }, { quoted: msg });
+            if (!packname && !author) return sock.sendMessage(jid, { text: '⚠️ Specify author or packname.\nExample: .take a:RICH MD', contextInfo: STYLE }, { quoted: msg });
 
             const buffer = await downloadMedia(sock, msg, located);
             if (!buffer || buffer.length < 100) throw new Error('Download failed');

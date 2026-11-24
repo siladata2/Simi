@@ -7,8 +7,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -134,7 +134,7 @@ module.exports = {
                 responseType: 'arraybuffer',
                 timeout: 30000,
                 headers: {
-                    'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                    'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
                 },
             });
             const buffer = Buffer.from(response.data);
@@ -144,7 +144,7 @@ module.exports = {
 
             await sock.sendMessage(jid, {
                 image: buffer,
-                caption: `🔍 *WANTED*\n\n👤 @${name}\n⚡ _Zenitsu AI_`,
+                caption: `🔍 *WANTED*\n\n👤 @${name}\n⚡ _RICH MD AI_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
 

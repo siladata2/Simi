@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202
     },
 };
@@ -69,7 +69,7 @@ module.exports = {
             }
 
             caption += `🔗 *Profile URL* : ${data.url || `https://t.me/${username}`}\n\n`;
-            caption += `⚡ _Zenitsu_`;
+            caption += `⚡ _RICH MD_`;
 
             // Envoi avec l'image si disponible, sinon texte simple
             if (data.image) {

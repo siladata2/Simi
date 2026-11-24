@@ -16,13 +16,13 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
 
-const DEFAULT_PACK = 'Zenitsu Mini';
+const DEFAULT_PACK = 'RICH MD';
 const DEFAULT_AUTHOR = 'Circle Sticker';
 
 // ═══════════════════════════════════════
@@ -202,7 +202,7 @@ module.exports = {
                     '.stickcircle (reply to image/video/sticker)\n\n' +
                     '💡 Creates a circular sticker from media.\n' +
                     '🔄 Multiple fallback methods.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -264,7 +264,7 @@ module.exports = {
                 console.log('⚠️ Circle effect failed, sending original image...');
                 await sock.sendMessage(jid, {
                     image: imageBuffer,
-                    caption: '⚠️ *Circle effect failed*\nSent original image instead.\n⚡ _Zenitsu_',
+                    caption: '⚠️ *Circle effect failed*\nSent original image instead.\n⚡ _RICH MD_',
                     contextInfo: STYLE,
                 }, { quoted: msg });
                 try { await sock.sendMessage(jid, { react: { text: '⚠️', key: msg.key } }); } catch (_) {}

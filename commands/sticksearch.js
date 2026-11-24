@@ -10,14 +10,14 @@ const webp = require('node-webpmux');
 // ═══════════════════════════════════════
 
 const DEFAULT_PACK = '𝐳𝐞𝐧𝐢𝐭𝐬𝐮 𝐦𝐢𝐧𝐢 𝙨𝙚𝙖𝙧𝙘𝙝';
-const DEFAULT_AUTHOR = '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟';
+const DEFAULT_AUTHOR = (process.env.BOT_NAME || 'RICH MD');
 
 const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };

@@ -5,8 +5,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -21,7 +21,7 @@ module.exports = {
         
         if (input.length < 3) {
             return sock.sendMessage(jid, {
-                text: '🐦 *Fake Tweet Generator*\n\n⚡ *Usage:* .tweet <name> | <username> | <text>\n\n✨ *Examples:*\n.tweet Zenitsu Hashira | zenitsu | I love this bot!\n.tweet Pop Cat | popcat | gib me food',
+                text: '🐦 *Fake Tweet Generator*\n\n⚡ *Usage:* .tweet <name> | <username> | <text>\n\n✨ *Examples:*\n.tweet RICH MD | zenitsu | I love this bot!\n.tweet Pop Cat | popcat | gib me food',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -51,7 +51,7 @@ module.exports = {
 
             await sock.sendMessage(jid, {
                 image: buffer,
-                caption: `🐦 *Fake Tweet*\n\n👤 ${name} (@${username})\n💬 ${text}\n\n⚡ _Zenitsu AI_`,
+                caption: `🐦 *Fake Tweet*\n\n👤 ${name} (@${username})\n💬 ${text}\n\n⚡ _RICH MD AI_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
 

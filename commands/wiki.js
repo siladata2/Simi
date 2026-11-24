@@ -6,8 +6,8 @@ const STYLE = {
     forwardingScore: 355,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -75,7 +75,7 @@ async function fetchFromWikipedia(query, lang = 'en') {
             },
             timeout: 10000,
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
             },
         });
 
@@ -103,7 +103,7 @@ async function fetchFromWikipedia(query, lang = 'en') {
             },
             timeout: 10000,
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
             },
         });
 
@@ -160,7 +160,7 @@ async function fetchFromWiktionary(query, lang = 'en') {
             },
             timeout: 8000,
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
             },
         });
 
@@ -206,7 +206,7 @@ async function fetchFromWikidata(query, lang = 'en') {
             },
             timeout: 8000,
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
             },
         });
 
@@ -270,7 +270,7 @@ async function fetchFromWikiquote(query, lang = 'en') {
             },
             timeout: 8000,
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
             },
         });
 
@@ -321,7 +321,7 @@ async function fetchFromWikivoyage(query, lang = 'en') {
             },
             timeout: 8000,
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
             },
         });
 
@@ -489,7 +489,7 @@ async function fetchImageInfo(query) {
             },
             timeout: 8000,
             headers: {
-                'User-Agent': 'Mozilla/5.0 (compatible; ZenitsuBot/1.0)',
+                'User-Agent': 'Mozilla/5.0 (compatible; RICH MDBot/1.0)',
             },
         });
 
@@ -540,7 +540,7 @@ module.exports = {
                       `✨ *Examples:*\n` +
                       `• .wiki Einstein (English)\n` +
                       `• .wiki fr Einstein (Français)\n` +
-                      `• .wiki ht Zenitsu (Kreyòl)\n` +
+                      `• .wiki ht RICH MD (Kreyòl)\n` +
                       `• .wiki es España (Español)\n` +
                       `• .wiki de Berlin (Deutsch)\n\n` +
                       `🌐 *Supported Languages:*\n${langList}\n\n` +
@@ -683,11 +683,11 @@ module.exports = {
             }
         }
 
-        responseText += `⚡ _Powered by Zenitsu Wiki (Multilingual)_`;
+        responseText += `⚡ _Powered by RICH MD Wiki (Multilingual)_`;
 
         // Limiter la longueur
         if (responseText.length > 4000) {
-            responseText = responseText.slice(0, 3900) + '\n\n📝 *Response truncated*\n⚡ _Powered by Zenitsu Wiki_';
+            responseText = responseText.slice(0, 3900) + '\n\n📝 *Response truncated*\n⚡ _Powered by RICH MD Wiki_';
         }
 
         // Cache la réponse

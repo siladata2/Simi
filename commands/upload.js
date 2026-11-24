@@ -201,7 +201,7 @@ module.exports = {
                     });
                 }
                 return sock.sendMessage(from, {
-                    text: '❌\n*Exemple:*\n`.upload & reply with media`)\n\n━━━━━━━━━━━━━━━\n_©CybernovA_'
+                    text: '❌\n*Exemple:*\n`.upload & reply with media`)\n\n━━━━━━━━━━━━━━━\n_©RICH MD_'
                 }, { quoted: msg });
             }
 
@@ -234,7 +234,7 @@ module.exports = {
                 mediaName = '🎵 Audio';
             } else {
                 return sock.sendMessage(from, {
-                    text: '❌ *Type not supported*\n\nFormats :\n• Image 📷\n• Vidéo 🎬\n• Document 📄\n• Audio 🎵\n\n━━━━━━━━━━━━━━━\n_©CybernovA_'
+                    text: '❌ *Type not supported*\n\nFormats :\n• Image 📷\n• Vidéo 🎬\n• Document 📄\n• Audio 🎵\n\n━━━━━━━━━━━━━━━\n_©RICH MD_'
                 }, { quoted: msg });
             }
 
@@ -271,7 +271,7 @@ module.exports = {
                 await sock.sendMessage(from, { react: { text: '✅', key: msg.key } });
             }
 
-            // Style Cybernova
+            // Style RICH MD
             const messageText = `╭━━━━❲ *UPLOAD - SUCCESS* ❳━━━━╮
 ┃
 ┃  📁 *File :* ${mediaName}
@@ -286,7 +286,7 @@ module.exports = {
 ┃
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
-_©CybernovA_`;
+_©RICH MD_`;
 
             await sock.sendMessage(from, {
                 text: messageText,
@@ -295,8 +295,8 @@ _©CybernovA_`;
                     forwardingScore: 540,
                     isForwarded: true,
                     forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363425394543602@newsletter',
-                        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+                        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+                        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
                         serverMessageId: 202
                     }
                 }
@@ -325,14 +325,14 @@ _©CybernovA_`;
 ┃  • Retry after 5 minutes
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
-_©CybernovA_`;
+_©RICH MD_`;
             } else {
                 errorMessage += `┃  📝 *Errorr :* ${err.message.substring(0, 100)}
 ┃
 ┃
 ╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯
 
-_©CybernovA_`;
+_©RICH MD_`;
             }
 
             await sock.sendMessage(from, { text: errorMessage }, { quoted: msg });

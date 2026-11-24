@@ -16,13 +16,13 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
 
-const DEFAULT_PACK = 'Zenitsu Mini';
+const DEFAULT_PACK = 'RICH MD';
 const DEFAULT_AUTHOR = 'Heart Sticker';
 
 // ═══════════════════════════════════════
@@ -189,7 +189,7 @@ module.exports = {
                     '.stickheart (reply to image/video/sticker)\n\n' +
                     '💡 Creates a heart-shaped sticker.\n' +
                     '🔄 Multiple fallback methods.\n\n' +
-                    '⚡ _Zenitsu_',
+                    '⚡ _RICH MD_',
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -243,7 +243,7 @@ module.exports = {
             if (!heartBuffer) {
                 await sock.sendMessage(jid, {
                     image: imageBuffer,
-                    caption: '⚠️ *Heart effect failed*\nSent original image.\n⚡ _Zenitsu_',
+                    caption: '⚠️ *Heart effect failed*\nSent original image.\n⚡ _RICH MD_',
                     contextInfo: STYLE,
                 }, { quoted: msg });
                 try { await sock.sendMessage(jid, { react: { text: '⚠️', key: msg.key } }); } catch (_) {}

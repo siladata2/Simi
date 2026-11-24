@@ -10,8 +10,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -190,7 +190,7 @@ module.exports = {
             `🔗 ${url}\n` +
             `🔧 ${usedMethod}\n` +
             '📱 1080×1920\n\n' +
-            '⚡ _Captured by Zenitsu_';
+            '⚡ _Captured by RICH MD_';
 
         if (result.type === 'buffer' && result.buffer) {
             try {

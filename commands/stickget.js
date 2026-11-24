@@ -14,7 +14,7 @@ const execFileAsync = promisify(execFile);
 
 const MAX_STICKERS = 30;
 const DEFAULT_COUNT = 10;
-const DEFAULT_PACK = 'Zenitsu Mini';
+const DEFAULT_PACK = 'RICH MD';
 const DEFAULT_AUTHOR = 'Stickerly';
 const MIN_FILE_SIZE = 500;
 
@@ -22,8 +22,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -225,7 +225,7 @@ module.exports = {
             }
 
             await sock.sendMessage(jid, {
-                text: `✅ *Stickerly Complete!*\n\n🔍 ${query}\n✅ ${sent} | 📊 ${count}\n⚡ _Zenitsu_`,
+                text: `✅ *Stickerly Complete!*\n\n🔍 ${query}\n✅ ${sent} | 📊 ${count}\n⚡ _RICH MD_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
 

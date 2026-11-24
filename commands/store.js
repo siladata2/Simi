@@ -12,8 +12,8 @@ const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -99,7 +99,7 @@ module.exports = {
                         '.store delete <folder>\n' +
                         '.store delete <folder> <item>\n' +
                         '.store list\n\n' +
-                        '⚡ _Zenitsu Store_',
+                        '⚡ _RICH MD Store_',
                     contextInfo: STYLE,
                 }, { quoted: msg });
             }
@@ -109,7 +109,7 @@ module.exports = {
                 const items = listItems(f);
                 text += `*${i + 1}.* ${f} (${items.length} items)\n`;
             });
-            text += '\n💡 .store get <folder> to see items\n⚡ _Zenitsu Store_';
+            text += '\n💡 .store get <folder> to see items\n⚡ _RICH MD Store_';
 
             return sock.sendMessage(jid, { text, contextInfo: STYLE }, { quoted: msg });
         }
@@ -171,7 +171,7 @@ module.exports = {
                         `📄 *File:* ${fileName}\n` +
                         `📏 *Size:* ${sizeKB} KB\n` +
                         `📦 *Type:* ${mediaInfo.type}\n\n` +
-                        '⚡ _Zenitsu Store_',
+                        '⚡ _RICH MD Store_',
                     contextInfo: STYLE,
                 }, { quoted: msg });
 
@@ -241,7 +241,7 @@ module.exports = {
             items.forEach((item, i) => {
                 text += `*${i + 1}.* ${item.name}\n   📏 ${item.size} KB | 📅 ${item.date}\n\n`;
             });
-            text += '💡 .store get <folder> <item> to retrieve\n⚡ _Zenitsu Store_';
+            text += '💡 .store get <folder> <item> to retrieve\n⚡ _RICH MD Store_';
 
             await sock.sendMessage(jid, { text, contextInfo: STYLE }, { quoted: msg });
         }
@@ -300,7 +300,7 @@ module.exports = {
                 '.store get <folder> <item>\n' +
                 '.store delete <folder>\n' +
                 '.store delete <folder> <item>\n\n' +
-                '⚡ _Zenitsu Store_',
+                '⚡ _RICH MD Store_',
             contextInfo: STYLE,
         }, { quoted: msg });
     },

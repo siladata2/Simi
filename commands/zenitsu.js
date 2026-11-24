@@ -10,14 +10,14 @@ const path = require('path');
 
 const PROMPT_FILE = path.join(__dirname, 'zenitsu.txt');
 
-const DEFAULT_PROMPT = 'You are Zenitsu, a WhatsApp bot assistant. You are friendly, helpful, and use ⚡ emoji. You help with coding, studying, and bot features.';
+const DEFAULT_PROMPT = 'You are RICH MD, a WhatsApp bot assistant. You are friendly, helpful, and use ⚡ emoji. You help with coding, studying, and bot features.';
 
 const STYLE = {
     forwardingScore: 350,
     isForwarded: true,
     forwardedNewsletterMessageInfo: {
-        newsletterJid: '120363425394543602@newsletter',
-        newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
+        newsletterJid: (process.env.CHANNEL_JID || '120363402325089913@newsletter'),
+        newsletterName: (process.env.BOT_NAME || 'RICH MD'),
         serverMessageId: 202,
     },
 };
@@ -39,7 +39,7 @@ function isOwner(sock, senderJid) {
     const botIds = [];
     if (sock.user?.id) botIds.push(getRawNumber(sock.user.id));
     if (sock.user?.lid) botIds.push(getRawNumber(sock.user.lid));
-    botIds.push(process.env.OWNER_NUMBER || '50935729494');
+    { const ownerNumber = (process.env.BOT_OWNER || process.env.OWNER_NUMBER || '').replace(/\D/g, ''); if (ownerNumber) botIds.push(ownerNumber); }
     if (global.subBots instanceof Map) {
         for (const [num] of global.subBots) botIds.push(getRawNumber(num));
     }
@@ -209,7 +209,7 @@ module.exports = {
             }
             savePrompt(newPrompt);
             return sock.sendMessage(jid, {
-                text: `✅ *Prompt Updated!*\n\n📝 ${newPrompt.slice(0, 300)}...\n⚡ _Zenitsu_`,
+                text: `✅ *Prompt Updated!*\n\n📝 ${newPrompt.slice(0, 300)}...\n⚡ _RICH MD_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -221,7 +221,7 @@ module.exports = {
         if (subCommand === 'getprompt' || subCommand === 'show') {
             const prompt = loadPrompt();
             return sock.sendMessage(jid, {
-                text: `📋 *Current Prompt*\n\n${prompt.slice(0, 500)}...\n⚡ _Zenitsu_`,
+                text: `📋 *Current Prompt*\n\n${prompt.slice(0, 500)}...\n⚡ _RICH MD_`,
                 contextInfo: STYLE,
             }, { quoted: msg });
         }
@@ -235,7 +235,7 @@ module.exports = {
                 return sock.sendMessage(jid, { text: '🚫 *Owner only!*', contextInfo: STYLE }, { quoted: msg });
             }
             savePrompt(DEFAULT_PROMPT);
-            return sock.sendMessage(jid, { text: '🔄 *Prompt Reset*\n⚡ _Zenitsu_', contextInfo: STYLE }, { quoted: msg });
+            return sock.sendMessage(jid, { text: '🔄 *Prompt Reset*\n⚡ _RICH MD_', contextInfo: STYLE }, { quoted: msg });
         }
 
         // ═══════════════════
@@ -246,7 +246,7 @@ module.exports = {
         if (!query || query.trim().length < 2) {
             return sock.sendMessage(jid, {
                 text:
-                    '⚡ *Zenitsu AI*\n\n' +
+                    '⚡ *RICH MD AI*\n\n' +
                     '.zenitsu <question>\n' +
                     '.zenitsu setprompt <prompt>\n' +
                     '.zenitsu getprompt\n' +
@@ -265,7 +265,7 @@ module.exports = {
 
         for (const api of AI_APIS) {
             try {
-                console.log(`⚡ Zenitsu: ${api.name}...`);
+                console.log(`⚡ RICH MD: ${api.name}...`);
                 reply = await api.fn(query, system);
                 if (reply && reply.trim().length > 5) {
                     console.log(`✅ ${api.name}`);
@@ -286,10 +286,10 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text:
-                '⚡ *Zenitsu AI*\n\n' +
+                '⚡ *RICH MD AI*\n\n' +
                 `❓ *Q:* ${query.slice(0, 200)}\n\n` +
                 `💬 *A:* ${reply}\n\n` +
-                '⚡ _Zenitsu_',
+                '⚡ _RICH MD_',
             contextInfo: STYLE,
         }, { quoted: msg });
 

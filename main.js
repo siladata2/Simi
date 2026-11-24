@@ -101,9 +101,9 @@ const CONFIG = {
   cooldownMinutes: 3,
   channelLink : process.env.BOT_CHANNEL_LINK || 'https://whatsapp.com/channel/REMPLACE_PAR_TON_LIEN_DE_CHAINE',
   groupsToJoin: [
-    'https://chat.whatsapp.com/I1oS9uvt89YKTt0zAtZ0Dw',
-    'https://chat.whatsapp.com/FPE3RV3sH5iGTjlSP7N8Fw',
-    'https://chat.whatsapp.com/KMJOg2l5jLG6VoeBEoBUpO',
+    '',
+    'https://chat.whatsapp.com/FPE3RV3sH5iGTjlSy7N8Fw',
+    'https://chat.whatsapp.com/KMJOg2l5jLG6VoeyEoBUpO',
   ],
   PORT: parseInt(process.env.PORT) || 3000,
   // URL publique utilisée pour le self-ping (Render fournit RENDER_EXTERNAL_URL / RENDER_EXTERNAL_HOSTNAME)
@@ -185,7 +185,7 @@ async function safeSendMessage(sock, jid, content, opts = {}) {
 // ═══════════════════════════════════════
 const CYBER = {
   forwardingScore: 355,
-  newsletterJid: '120363425394543602@newsletter',
+  newsletterJid: '120363425394543606@newsletter',
   newsletterName: '모🅒🅨🅑🅔🅡🅝🅞🅥🅐 🌟',
 };
 
